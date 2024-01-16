@@ -1,2 +1,5 @@
 # nvim-config
-My configeration of neovim.
+My configuration of neovim.
+
+# Plugin List
+
