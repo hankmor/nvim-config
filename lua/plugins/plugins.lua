@@ -51,7 +51,7 @@ return require('packer').startup(function(use)
   -- 自动补全
   use "hrsh7th/nvim-cmp"
   use "hrsh7th/cmp-nvim-lsp"
-  use 'hrsh7th/cmp-vsnip'
+  use "hrsh7th/cmp-vsnip"
   use "L3MON4D3/LuaSnip" -- snippets引擎，不装这个自动补全会出问题
   use "saadparwaiz1/cmp_luasnip"
   use "hrsh7th/cmp-path" -- 补全文件路径
@@ -62,10 +62,24 @@ return require('packer').startup(function(use)
   use "akinsho/bufferline.nvim" -- buffer分割线
   use "lewis6991/gitsigns.nvim" -- 左则git提示
 
+    -- 格式化代码
+    use 'sbdchd/neoformat'
+
+  -- 更改包裹字符
+  use ({"kylechui/nvim-surround", tab = "*", config = function ()
+    require("nvim-surround").setup({
+    })
+  end})
+
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.5',  -- 文件检索
     requires = { {'nvim-lua/plenary.nvim'} }
   }
+
+    -- markdown预览
+
+    -- install without yarn or npm
+  use({ "iamcco/markdown-preview.nvim" })
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

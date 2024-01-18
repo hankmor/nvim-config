@@ -56,3 +56,13 @@ lspconfig.gopls.setup {
     -- vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
   end
 }
+
+function FormatFunction()
+  vim.lsp.buf.format({
+    async = true,
+    range = {
+      ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+      ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+    }
+  })
+end

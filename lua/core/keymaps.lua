@@ -3,6 +3,8 @@ vim.g.mapleader = " "
 
 local km = vim.keymap
 
+vim.api.nvim_set_keymap('n', '<leader>r', ':luafile $MYVIMRC<CR>', {noremap = true, silent = true})
+
 -- 插入模式
 
 
@@ -30,3 +32,12 @@ km.set("n", "<leader>s", ":w<CR>")
 -- 切换buffer
 km.set("n", "<leader>l", ":bnext<CR>")
 km.set("n", "<leader>h", ":bprevious<CR>")
+
+-- 格式化代码
+km.set("n", "<leader>f", ":Neoformat<CR>")
+km.set("n", "<", ":<<CR>")
+km.set("n", ">", ":><CR>")
+
+-- 翻页
+km.set("n", "<C-u>", "10k")
+km.set("n", "<C-d>", "10j")
