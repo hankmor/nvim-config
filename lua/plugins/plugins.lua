@@ -40,6 +40,8 @@ return require('packer').startup(function(use)
 
   use "nvim-treesitter/nvim-treesitter" -- 语法高亮
   use "p00f/nvim-ts-rainbow" -- 配合treesitter，不同括号颜色区分
+
+  -- 语法提示 lsp
   use {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",  -- 这个相当于mason.nvim和lspconfig的桥梁
@@ -49,10 +51,10 @@ return require('packer').startup(function(use)
   -- 自动补全
   use "hrsh7th/nvim-cmp"
   use "hrsh7th/cmp-nvim-lsp"
+  use 'hrsh7th/cmp-vsnip'
   use "L3MON4D3/LuaSnip" -- snippets引擎，不装这个自动补全会出问题
   use "saadparwaiz1/cmp_luasnip"
-  use "rafamadriz/friendly-snippets"
-  use "hrsh7th/cmp-path" -- 文件路径
+  use "hrsh7th/cmp-path" -- 补全文件路径
 
   use "numToStr/Comment.nvim" -- gcc和gc注释
   use "windwp/nvim-autopairs" -- 自动补全括号

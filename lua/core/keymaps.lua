@@ -26,6 +26,7 @@ km.set("n", "<leader>nh", ":nohl<CR>")
 km.set("n", "<leader>e", ":NvimTreeToggle<CR>")
 -- 退出改为主键 + q
 km.set("n", "<leader>q", ":q<CR>")
+km.set("n", "<leader>s", ":w<CR>")
 -- 切换buffer
 km.set("n", "<leader>l", ":bnext<CR>")
 km.set("n", "<leader>h", ":bprevious<CR>")

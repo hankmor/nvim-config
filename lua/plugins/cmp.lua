@@ -63,6 +63,7 @@ cmp.setup({
   -- 引用自动补全插件
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+    { name = 'vsnip' },
     { name = 'luasnip' },
     { name = 'path' },
   }, {
