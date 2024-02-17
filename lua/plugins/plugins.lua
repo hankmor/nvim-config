@@ -83,6 +83,18 @@ return require('packer').startup(function(use)
     -- fugitive 集成git
     use({ "tpope/vim-fugitive" })
 
+    -- 启动界面
+    -- use { 'nvimdev/dashboard-nvim' }
+    use {
+        'nvimdev/dashboard-nvim',
+        event = 'VimEnter',
+        -- config = function()
+        --     require('dashboard').setup {
+        --         -- config
+        --     }
+        -- end,
+        requires = {'nvim-tree/nvim-web-devicons'}
+    }
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
