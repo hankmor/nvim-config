@@ -47,3 +47,7 @@ km.set("n", ">>", ":><CR>")
 -- 翻页
 km.set("n", "<C-u>", "10k")
 km.set("n", "<C-d>", "10j")
+
+-- git操作
+km.set("n", "<leader>gp", ":Git pull<CR>")
+km.set("n", "<leader>gk", ":Git push<CR>")

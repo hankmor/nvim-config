@@ -20,6 +20,9 @@ vim.cmd([[
 ]])
 
 return require('packer').startup(function(use)
+    -- 图标
+    use {'nvim-tree/nvim-web-devicons'}
+
     use 'wbthomason/packer.nvim'
     -- My plugins here
     use 'folke/tokyonight.nvim' -- 主题  
@@ -84,15 +87,50 @@ return require('packer').startup(function(use)
     use({ "tpope/vim-fugitive" })
 
     -- 启动界面
-    -- use { 'nvimdev/dashboard-nvim' }
+    -- use {
+    --     'goolord/alpha-nvim',
+    --     requires = { 'nvim-tree/nvim-web-devicons', 'nvim-lua/plenary.nvim' },
+    --     config = function ()
+    --         require'alpha'.setup(require'alpha.themes.theta'.config)
+    --     end
+    -- }
     use {
         'nvimdev/dashboard-nvim',
         event = 'VimEnter',
-        -- config = function()
-        --     require('dashboard').setup {
-        --         -- config
-        --     }
-        -- end,
+        config = function()
+            require('dashboard').setup {
+                -- config
+                theme = 'hyper',
+                config = {
+                    week_header = {
+                        enable = true,
+                    },
+                    shortcut = {
+                        { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+                        {
+                            icon = ' ',
+                            icon_hl = '@variable',
+                            desc = 'Files',
+                            group = 'Label',
+                            action = 'Telescope find_files',
+                            key = 'f',
+                        },
+                        {
+                            desc = ' Apps',
+                            group = 'DiagnosticHint',
+                            action = 'Telescope app',
+                            key = 'a',
+                        },
+                        {
+                            desc = ' dotfiles',
+                            group = 'Number',
+                            action = 'Telescope dotfiles',
+                            key = 'd',
+                        },
+                    },
+                },
+            }
+        end,
         requires = {'nvim-tree/nvim-web-devicons'}
     }
     -- Automatically set up your configuration after cloning packer.nvim
