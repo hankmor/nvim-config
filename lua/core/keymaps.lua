@@ -10,8 +10,8 @@ km.set("v", "J", ":m '<-2<CR>gv=gv", opts)
 km.set("v", "K", ":m '>+1<CR>gv=gv", opts)
 
 -- 快速移动
-km.set("n", "J", "5j", opts)
-km.set("n", "K", "5k", opts)
+-- km.set("n", "J", "5j", opts)
+-- km.set("n", "K", "5k", opts)
 km.set("n", "H", "0", opts)
 km.set("n", "L", "$", opts)
 
@@ -26,8 +26,6 @@ km.set("n", "<leader>sw", ":set wrap!<cr>", opts) -- 是否换行切换
 km.set("v", "p", '"_dP', opts)
 
 ---- 添加窗口 ----
--- 主键 + sv 增加垂直窗口
--- 主键 + sh 增加水平窗口
 km.set("n", "<leader>sv", "<C-w>v", opts) -- 增加垂直窗口
 km.set("n", "<leader>sh", "<C-w>s", opts) -- 增加水平窗口
 km.set("n", "sv", "<C-w>t<C-w>H", opts) 
@@ -41,23 +39,10 @@ km.set("n", "<left>", ":vertical resize+5<cr>", opts)
 km.set("n", "<right>", ":vertical resize-5<cr>", opts)
 
 ---- 取消搜索的高亮 ----
--- 主键 + nh
 km.set("n", "<leader>nh", ":nohl<CR>", opts)
 
----- 插件改建 ----
--- 文档树切换改为 主键 + e
-km.set("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
--- 退出改为主键 + q
-km.set("n", "<leader>q", ":q<CR>", opts)
+km.set("n", "<leader>Q", ":q<CR>", opts)
 km.set("n", "<leader>s", ":w<CR>", opts)
-
--- bufferline操作
-km.set("n", "bn", ":BufferLineCycleNext<CR>", opts) -- 选择后一个
-km.set("n", "bp", ":BufferLineCyclePrev<CR>", opts) -- 选择前一个
-km.set("n", "bco", ":BufferLineCloseOthers<CR>", opts) -- 关闭其他
--- km.set("n", "bc", ":BufferLineDelete<CR>", opts) -- 删除
-km.set("n", "bc", ":bdelete! %d<CR>", opts) -- 关闭当前
-km.set("n", "bs", ":BufferLinePick<CR>", opts) -- 选择
 
 -- 格式化代码
 km.set("n", "<leader>f", ":Neoformat<CR>", opts)
