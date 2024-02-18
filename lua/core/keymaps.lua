@@ -77,3 +77,4 @@ km.set("v", "<M-up>", ":m '<-2<CR>gv=gv", opts)
 
 -- git
 km.set("n", "<leader>g", ":Git<CR>", opts)
+km.set("n", "<leader>gp", ":Git push<CR>", opts)
