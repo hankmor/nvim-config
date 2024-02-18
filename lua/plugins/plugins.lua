@@ -9,15 +9,15 @@ local ensure_packer = function()
     return false
 end
 
-local packer_bootstrap = ensure_packer()
+-- local packer_bootstrap = ensure_packer()
 
 -- 自动安装插件，而不是执行 packer sync
-vim.cmd([[
-  augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
+-- vim.cmd([[
+--   augroup packer_user_config
+--   autocmd!
+--   autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--   augroup end
+-- ]])
 
 return require('packer').startup(function(use)
     -- 图标
@@ -45,11 +45,30 @@ return require('packer').startup(function(use)
     use "p00f/nvim-ts-rainbow" -- 配合treesitter，不同括号颜色区分
 
     -- 语法提示 lsp
-    use {
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",  -- 这个相当于mason.nvim和lspconfig的桥梁
-        "neovim/nvim-lspconfig"
-    }
+    use({ "williamboman/mason.nvim" })
+    use({ "williamboman/mason-lspconfig.nvim" })
+    use({ "neovim/nvim-lspconfig" })
+    use({ "hrsh7th/nvim-cmp" }) -- Autocompletion plugin
+    use({ "hrsh7th/cmp-nvim-lsp" }) -- LSP source for nvim-cmp
+    use({ "hrsh7th/cmp-buffer" })
+    use({ "hrsh7th/cmp-path" })
+    use({ "hrsh7th/cmp-cmdline" })
+    use({ "hrsh7th/cmp-nvim-lua" })
+    use({ "f3fora/cmp-spell" })
+    use({ "hrsh7th/cmp-calc" })
+    use({ "saadparwaiz1/cmp_luasnip" }) -- Snippets source for nvim-cmp
+    use({ "L3MON4D3/LuaSnip" }) -- Snippets plugin
+    use({ "rafamadriz/friendly-snippets" })
+    use({ "ray-x/cmp-treesitter" })
+    use({ "onsails/lspkind.nvim" })
+
+    -- languages
+    use({ "mfussenegger/nvim-dap" })
+    use({ "theHamsta/nvim-dap-virtual-text" })
+    use({ "rcarriga/nvim-dap-ui" })
+
+    use({ "olexsmir/gopher.nvim" })
+    use({ "leoluz/nvim-dap-go" })
 
     -- 自动补全
     use "hrsh7th/nvim-cmp"
@@ -65,6 +84,12 @@ return require('packer').startup(function(use)
     use "akinsho/bufferline.nvim" -- buffer分割线
     use "lewis6991/gitsigns.nvim" -- 左则git提示
 
+    use 'ethanholz/nvim-lastplace' -- 打开文件时回到上次的光标位置
+    -- 快速搜索字符
+    use {
+        'phaazon/hop.nvim',
+        branch = 'v2', -- optional but strongly recommended
+    }
     -- 格式化代码
     use 'sbdchd/neoformat'
 
@@ -136,6 +161,6 @@ return require('packer').startup(function(use)
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
-        require('packer').sync()
+        -- require('packer').sync()
     end
 end)
