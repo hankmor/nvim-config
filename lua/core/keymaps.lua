@@ -75,6 +75,9 @@ km.set("n", "<M-down>", ":m .+1<CR>", opts)
 km.set("v", "<M-down>", ":m '>+1<CR>gv=gv", opts)
 km.set("v", "<M-up>", ":m '<-2<CR>gv=gv", opts)
 
+-- dashboard
+km.set("n", "<leader>db", ":Dashboard<CR>", opts)
+
 -- git
 km.set("n", "<leader>gt", ":Git<CR>", opts)
 km.set("n", "<leader>gp", ":Git push<CR>", opts)
