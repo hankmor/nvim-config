@@ -76,5 +76,9 @@ km.set("v", "<M-down>", ":m '>+1<CR>gv=gv", opts)
 km.set("v", "<M-up>", ":m '<-2<CR>gv=gv", opts)
 
 -- git
-km.set("n", "<leader>g", ":Git<CR>", opts)
-km.set("n", "<leader>ps", ":Git push<CR>", opts)
+km.set("n", "<leader>gt", ":Git<CR>", opts)
+km.set("n", "<leader>gp", ":Git push<CR>", opts)
+km.set("n", "<leader>gs", ":Git status<CR>", opts)
+km.set("n", "<leader>gl", ":Git pull<CR>", opts)
+km.set("n", "<leader>ga", ":Git add .<CR>", opts)
+km.set("n", "<leader>gc", ":Git commit -m ", opts)
