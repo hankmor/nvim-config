@@ -37,8 +37,8 @@ km.set("n", "srv", "<C-w>b<C-w>H", opts) -- 切换为垂直分隔窗口
 -- 调整窗口大小
 km.set("n", "<up>", ":res -5<cr>", opts)
 km.set("n", "<down>", ":res +5<cr>", opts)
-km.set("n", "<left>", ":ertical resize-5<cr>", opts)
-km.set("n", "<right>", ":vertical resize+5<cr>", opts)
+km.set("n", "<left>", ":vertical resize+5<cr>", opts)
+km.set("n", "<right>", ":vertical resize-5<cr>", opts)
 
 ---- 取消搜索的高亮 ----
 -- 主键 + nh
