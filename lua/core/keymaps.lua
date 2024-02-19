@@ -41,7 +41,7 @@ km.set("n", "<right>", ":vertical resize-5<cr>", opts)
 ---- 取消搜索的高亮 ----
 km.set("n", "<leader>nh", ":nohl<CR>", opts)
 
-km.set("n", "<leader>Q", ":q<CR>", opts)
+km.set("n", "Q", ":q<CR>", opts)
 km.set("n", "<leader>s", ":w<CR>", opts)
 
 -- 格式化代码
