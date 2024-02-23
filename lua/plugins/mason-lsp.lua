@@ -16,7 +16,7 @@ function M.config()
 			"ltex",
 			"marksman",
 			"pyright",
-			"r_language_server",
+			-- "r_language_server",
 			"sqlls",
 			"taplo",
 			"vimls",
