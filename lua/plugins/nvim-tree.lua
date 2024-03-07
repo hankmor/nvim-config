@@ -9,18 +9,19 @@ vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 vim.opt.termguicolors = true
 
 local function my_on_attach(bufnr)
-  local api = require "nvim-tree.api"
+    local api = require "nvim-tree.api"
 
-  local function opts(desc)
-    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-  end
+    local function opts(desc)
+        return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    end
 
-  -- default mappings
-  api.config.mappings.default_on_attach(bufnr)
+    -- default mappings
+    api.config.mappings.default_on_attach(bufnr)
 
-  -- custom mappings
-  vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
-  vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+    -- custom mappings
+    vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
+    vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+    vim.keymap.set('n', '<leader>-c',     api.node.navigate.parent_close,                  opts('Help'))
 end
 
 -- empty setup using defaults
@@ -41,7 +42,7 @@ require("nvim-tree").setup({
     },
     -- 开始重新更新目录到焦点文件
     update_focused_file = {
-        enable = false,
+        enable = true,
         update_cwd = true,
     },
     renderer = {

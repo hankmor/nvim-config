@@ -104,6 +104,9 @@ return require('packer').startup(function(use)
         requires = { {'nvim-lua/plenary.nvim'} }
     }
 
+    -- 显示代码的函数列表
+    use({ "stevearc/aerial.nvim", })
+
     -- markdown预览
     -- install without yarn or npm
     use({ "iamcco/markdown-preview.nvim" })
