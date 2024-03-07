@@ -82,6 +82,7 @@ return require('packer').startup(function(use)
     use "windwp/nvim-autopairs" -- 自动补全括号
 
     use "akinsho/bufferline.nvim" -- buffer分割线
+    use 'famiu/bufdelete.nvim' -- buffer窗口关闭插件
     use "lewis6991/gitsigns.nvim" -- 左则git提示
 
     use 'ethanholz/nvim-lastplace' -- 打开文件时回到上次的光标位置

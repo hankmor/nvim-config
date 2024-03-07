@@ -52,7 +52,8 @@ vim.opt.termguicolors = true
     vim.keymap.set("n", "bn", ":BufferLineCycleNext<CR>", opts) -- 选择后一个
     vim.keymap.set("n", "bp", ":BufferLineCyclePrev<CR>", opts) -- 选择前一个
     vim.keymap.set("n", "bco", ":BufferLineCloseOthers<CR>", opts) -- 关闭其他
-    vim.keymap.set("n", "bc", ":bdelete! %d<CR>", opts) -- 关闭当前
+    -- vim.keymap.set("n", "bc", "bufdelete<CR>", opts) -- 关闭当前
+    vim.keymap.set("n", "bc", "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>", opts) -- 关闭当前
     vim.keymap.set("n", "bs", ":BufferLinePick<CR>", opts) -- 选择
 
 
