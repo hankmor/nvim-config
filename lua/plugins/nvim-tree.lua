@@ -42,8 +42,8 @@ require("nvim-tree").setup({
     },
     -- 开始重新更新目录到焦点文件
     update_focused_file = {
-        enable = true,
-        update_cwd = true,
+        enable = false,
+        update_cwd = false,
     },
     renderer = {
         group_empty = false,
