@@ -26,6 +26,8 @@ end
 
 -- empty setup using defaults
 require("nvim-tree").setup({
+    sync_root_with_cwd = true,
+    respect_buf_cwd = true,
     on_attach = my_on_attach,
     sort = {
         sorter = "case_sensitive",
@@ -42,8 +44,9 @@ require("nvim-tree").setup({
     },
     -- 开始重新更新目录到焦点文件
     update_focused_file = {
-        enable = false,
+        enable = true,
         update_cwd = false,
+        update_root = true,
     },
     renderer = {
         group_empty = false,

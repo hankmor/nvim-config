@@ -37,6 +37,8 @@ return require('packer').startup(function(use)
             'nvim-tree/nvim-web-devicons', -- 文档树图标, 需要终端字体改为 nerdfont，见 nerdfonts.com
         }
     }
+    -- 项目管理
+    use { "ahmedkhalf/project.nvim", }
 
     -- 用ctrl-hjkl来切换不同窗口
     use "christoomey/vim-tmux-navigator"
