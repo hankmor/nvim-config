@@ -12,12 +12,12 @@ end
 -- local packer_bootstrap = ensure_packer()
 
 -- 自动安装插件，而不是执行 packer sync
--- vim.cmd([[
---   augroup packer_user_config
---   autocmd!
---   autocmd BufWritePost plugins.lua source <afile> | PackerSync
---   augroup end
--- ]])
+vim.cmd([[
+  augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]])
 
 return require('packer').startup(function(use)
     -- 图标
@@ -53,7 +53,7 @@ return require('packer').startup(function(use)
     use({ "hrsh7th/nvim-cmp" }) -- Autocompletion plugin
     use({ "hrsh7th/cmp-nvim-lsp" }) -- LSP source for nvim-cmp
     use({ "hrsh7th/cmp-buffer" })
-    use({ "hrsh7th/cmp-path" })
+    use({ "hrsh7th/cmp-path" }) -- 补全文件路径
     use({ "hrsh7th/cmp-cmdline" })
     use({ "hrsh7th/cmp-nvim-lua" })
     use({ "f3fora/cmp-spell" })
@@ -78,7 +78,6 @@ return require('packer').startup(function(use)
     use "hrsh7th/cmp-vsnip"
     use "L3MON4D3/LuaSnip" -- snippets引擎，不装这个自动补全会出问题
     use "saadparwaiz1/cmp_luasnip"
-    use "hrsh7th/cmp-path" -- 补全文件路径
 
     use "numToStr/Comment.nvim" -- gcc和gc注释
     use "windwp/nvim-autopairs" -- 自动补全括号
@@ -118,52 +117,16 @@ return require('packer').startup(function(use)
     use({ "tpope/vim-fugitive" })
 
     -- 启动界面
-    -- use {
-    --     'goolord/alpha-nvim',
-    --     requires = { 'nvim-tree/nvim-web-devicons', 'nvim-lua/plenary.nvim' },
-    --     config = function ()
-    --         require'alpha'.setup(require'alpha.themes.theta'.config)
-    --     end
-    -- }
     use {
         'nvimdev/dashboard-nvim',
         event = 'VimEnter',
-        config = function()
-            require('dashboard').setup {
-                -- config
-                theme = 'hyper',
-                config = {
-                    week_header = {
-                        enable = true,
-                    },
-                    shortcut = {
-                        { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
-                        {
-                            icon = ' ',
-                            icon_hl = '@variable',
-                            desc = 'Files',
-                            group = 'Label',
-                            action = 'Telescope find_files',
-                            key = 'f',
-                        },
-                        {
-                            desc = ' Apps',
-                            group = 'DiagnosticHint',
-                            action = 'Telescope app',
-                            key = 'a',
-                        },
-                        {
-                            desc = ' dotfiles',
-                            group = 'Number',
-                            action = 'Telescope dotfiles',
-                            key = 'd',
-                        },
-                    },
-                },
-            }
-        end,
         requires = {'nvim-tree/nvim-web-devicons'}
     }
+
+    -- 从剪贴板粘贴图片
+    use 'ekickx/clipboard-image.nvim'
+
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
