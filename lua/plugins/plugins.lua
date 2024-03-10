@@ -76,7 +76,6 @@ M.config = function ()
 
         -- 自动补全
         use "hrsh7th/nvim-cmp"
-        use "hrsh7th/cmp-nvim-lsp"
         use "hrsh7th/cmp-vsnip"
         use "numToStr/Comment.nvim" -- gcc和gc注释
         use "windwp/nvim-autopairs" -- 自动补全括号

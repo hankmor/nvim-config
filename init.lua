@@ -1,5 +1,5 @@
 -- 在第一行，优先加载
-require("plugins.plugins")
+require("plugins.plugins").config()
 
 require("core.opt").config()
 require("core.keymaps").config()

@@ -1,3 +1,4 @@
+opts = {noremap = true, silent = true}
 local M = {}
 
 function M.config()
@@ -5,7 +6,6 @@ function M.config()
     vim.g.mapleader = " "
 
     local km = vim.keymap
-    local opts = {noremap = true, silent = true}
     vim.api.nvim_set_keymap('n', '<leader>r', ':luafile $MYVIMRC<CR>', opts)
 
     -- 单行多行移动

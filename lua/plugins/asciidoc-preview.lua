@@ -23,6 +23,8 @@ function M.config()
             --             => inaccurate, because very content dependent
             position = 'current',
         },
+
+        vim.keymap.set("n", "<leader>av", ":AsciiDocPreview<cr>", opts),
     })
 end
 
