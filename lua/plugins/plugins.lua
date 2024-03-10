@@ -1,3 +1,4 @@
+local M = {}
 local ensure_packer = function()
     local fn = vim.fn
     local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -12,124 +13,130 @@ end
 -- local packer_bootstrap = ensure_packer()
 
 -- 自动安装插件，而不是执行 packer sync
-vim.cmd([[
-  augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
+-- vim.cmd([[
+--   augroup packer_user_config
+--   autocmd!
+--   autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--   augroup end
+-- ]])
 
-return require('packer').startup(function(use)
-    -- 图标
-    use {'nvim-tree/nvim-web-devicons'}
+M.config = function ()
+    require('packer').startup(function(use)
+        -- 图标
+        use {'nvim-tree/nvim-web-devicons'}
 
-    use 'wbthomason/packer.nvim'
-    -- My plugins here
-    use 'folke/tokyonight.nvim' -- 主题  
-    use {
-        'nvim-lualine/lualine.nvim',  -- 状态栏
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true }  -- 状态栏图标
-    }
-
-    use {
-        'nvim-tree/nvim-tree.lua',  -- 文档树
-        requires = {
-            'nvim-tree/nvim-web-devicons', -- 文档树图标, 需要终端字体改为 nerdfont，见 nerdfonts.com
+        use 'wbthomason/packer.nvim'
+        -- My plugins here
+        use 'folke/tokyonight.nvim' -- 主题  
+        use {
+            'nvim-lualine/lualine.nvim',  -- 状态栏
+            requires = { 'kyazdani42/nvim-web-devicons', opt = true }  -- 状态栏图标
         }
-    }
-    -- 项目管理
-    use { "ahmedkhalf/project.nvim", }
 
-    -- 用ctrl-hjkl来切换不同窗口
-    use "christoomey/vim-tmux-navigator"
+        use {
+            'nvim-tree/nvim-tree.lua',  -- 文档树
+            requires = {
+                'nvim-tree/nvim-web-devicons', -- 文档树图标, 需要终端字体改为 nerdfont，见 nerdfonts.com
+            }
+        }
+        -- 项目管理
+        use { "ahmedkhalf/project.nvim", }
 
-    use "nvim-treesitter/nvim-treesitter" -- 语法高亮
-    use "p00f/nvim-ts-rainbow" -- 配合treesitter，不同括号颜色区分
+        -- 用ctrl-hjkl来切换不同窗口
+        use "christoomey/vim-tmux-navigator"
 
-    -- 语法提示 lsp
-    use({ "williamboman/mason.nvim" })
-    use({ "williamboman/mason-lspconfig.nvim" })
-    use({ "neovim/nvim-lspconfig" })
-    use({ "hrsh7th/nvim-cmp" }) -- Autocompletion plugin
-    use({ "hrsh7th/cmp-nvim-lsp" }) -- LSP source for nvim-cmp
-    use({ "hrsh7th/cmp-buffer" })
-    use({ "hrsh7th/cmp-path" }) -- 补全文件路径
-    use({ "hrsh7th/cmp-cmdline" })
-    use({ "hrsh7th/cmp-nvim-lua" })
-    use({ "f3fora/cmp-spell" })
-    use({ "hrsh7th/cmp-calc" })
-    use({ "saadparwaiz1/cmp_luasnip" }) -- Snippets source for nvim-cmp
-    use({ "L3MON4D3/LuaSnip" }) -- Snippets plugin
-    use({ "rafamadriz/friendly-snippets" })
-    use({ "ray-x/cmp-treesitter" })
-    use({ "onsails/lspkind.nvim" })
+        use "nvim-treesitter/nvim-treesitter" -- 语法高亮
+        use "p00f/nvim-ts-rainbow" -- 配合treesitter，不同括号颜色区分
 
-    -- languages
-    use({ "mfussenegger/nvim-dap" })
-    use({ "theHamsta/nvim-dap-virtual-text" })
-    use({ "rcarriga/nvim-dap-ui" })
+        -- 语法提示 lsp
+        use({ "williamboman/mason.nvim" })
+        use({ "williamboman/mason-lspconfig.nvim" })
+        use({ "neovim/nvim-lspconfig" })
+        use({ "hrsh7th/nvim-cmp" }) -- Autocompletion plugin
+        use({ "hrsh7th/cmp-nvim-lsp" }) -- LSP source for nvim-cmp
+        use({ "hrsh7th/cmp-buffer" })
+        use({ "hrsh7th/cmp-path" }) -- 补全文件路径
+        use({ "hrsh7th/cmp-cmdline" })
+        use({ "hrsh7th/cmp-nvim-lua" })
+        use({ "f3fora/cmp-spell" })
+        use({ "hrsh7th/cmp-calc" })
+        use({ "saadparwaiz1/cmp_luasnip" }) -- Snippets source for nvim-cmp
+        use({ "L3MON4D3/LuaSnip" }) -- Snippets plugin
+        use({ "rafamadriz/friendly-snippets" })
+        use({ "ray-x/cmp-treesitter" })
+        use({ "onsails/lspkind.nvim" })
 
-    use({ "olexsmir/gopher.nvim" })
-    use({ "leoluz/nvim-dap-go" })
+        -- languages
+        use({ "mfussenegger/nvim-dap" })
+        use({ "theHamsta/nvim-dap-virtual-text" })
+        use({ "rcarriga/nvim-dap-ui" })
 
-    -- 自动补全
-    use "hrsh7th/nvim-cmp"
-    use "hrsh7th/cmp-nvim-lsp"
-    use "hrsh7th/cmp-vsnip"
-    use "L3MON4D3/LuaSnip" -- snippets引擎，不装这个自动补全会出问题
-    use "saadparwaiz1/cmp_luasnip"
+        use({ "olexsmir/gopher.nvim" })
+        use({ "leoluz/nvim-dap-go" })
 
-    use "numToStr/Comment.nvim" -- gcc和gc注释
-    use "windwp/nvim-autopairs" -- 自动补全括号
+        -- 自动补全
+        use "hrsh7th/nvim-cmp"
+        use "hrsh7th/cmp-nvim-lsp"
+        use "hrsh7th/cmp-vsnip"
+        use "numToStr/Comment.nvim" -- gcc和gc注释
+        use "windwp/nvim-autopairs" -- 自动补全括号
 
-    use "akinsho/bufferline.nvim" -- buffer分割线
-    use 'famiu/bufdelete.nvim' -- buffer窗口关闭插件
-    use "lewis6991/gitsigns.nvim" -- 左则git提示
+        use "akinsho/bufferline.nvim" -- buffer分割线
+        use 'famiu/bufdelete.nvim' -- buffer窗口关闭插件
+        use "lewis6991/gitsigns.nvim" -- 左则git提示
 
-    use 'ethanholz/nvim-lastplace' -- 打开文件时回到上次的光标位置
-    -- 快速搜索字符
-    use {
-        'phaazon/hop.nvim',
-        branch = 'v2', -- optional but strongly recommended
-    }
-    -- 格式化代码
-    use 'sbdchd/neoformat'
+        use 'ethanholz/nvim-lastplace' -- 打开文件时回到上次的光标位置
+        -- 快速搜索字符
+        use {
+            'phaazon/hop.nvim',
+            branch = 'v2', -- optional but strongly recommended
+        }
+        -- 格式化代码
+        use 'sbdchd/neoformat'
 
-    -- 更改包裹字符
-    use ({"kylechui/nvim-surround", tab = "*", config = function ()
-        require("nvim-surround").setup({
+        -- 更改包裹字符
+        use ({"kylechui/nvim-surround", tab = "*", config = function ()
+            require("nvim-surround").setup({
+            })
+        end})
+
+        use {
+            'nvim-telescope/telescope.nvim', tag = '0.1.5',  -- 文件检索
+            requires = { {'nvim-lua/plenary.nvim'} }
+        }
+
+        -- 显示代码的函数列表
+        use({ "stevearc/aerial.nvim", })
+
+        -- markdown预览
+        -- install without yarn or npm
+        use({ "iamcco/markdown-preview.nvim" })
+
+        -- fugitive 集成git
+        use({ "tpope/vim-fugitive" })
+
+        -- 启动界面
+        use {
+            'nvimdev/dashboard-nvim',
+            event = 'VimEnter',
+            requires = {'nvim-tree/nvim-web-devicons'}
+        }
+
+        -- 从剪贴板粘贴图片
+        use 'ekickx/clipboard-image.nvim'
+
+        -- asciidoc预览插件
+        use({
+            'tigion/nvim-asciidoc-preview',
+            run = 'cd server && npm install',
         })
-    end})
 
-    use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.5',  -- 文件检索
-        requires = { {'nvim-lua/plenary.nvim'} }
-    }
+        -- Automatically set up your configuration after cloning packer.nvim
+        -- Put this at the end after all plugins
+        if packer_bootstrap then
+            -- require('packer').sync()
+        end
+    end)
+end
 
-    -- 显示代码的函数列表
-    use({ "stevearc/aerial.nvim", })
-
-    -- markdown预览
-    -- install without yarn or npm
-    use({ "iamcco/markdown-preview.nvim" })
-
-    -- fugitive 集成git
-    use({ "tpope/vim-fugitive" })
-
-    -- 启动界面
-    use {
-        'nvimdev/dashboard-nvim',
-        event = 'VimEnter',
-        requires = {'nvim-tree/nvim-web-devicons'}
-    }
-
-    -- 从剪贴板粘贴图片
-    use 'ekickx/clipboard-image.nvim'
-
-
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if packer_bootstrap then
-        -- require('packer').sync()
-    end
-end)
+return M

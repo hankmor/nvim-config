@@ -1,111 +1,116 @@
-local opt = vim.opt
-local cmd = vim.cmd
+local M = {}
 
--- basics
-cmd("syntax on")
-cmd("filetype plugin indent on")
-cmd("nohlsearch")
-opt.shiftround = true
-opt.updatetime = 100
+function M.config()
+    local opt = vim.opt
+    local cmd = vim.cmd
 
--- 行号
-opt.relativenumber = true -- 显示相对行号
-opt.number = true -- 开启行号显示
+    -- basics
+    cmd("syntax on")
+    cmd("filetype plugin indent on")
+    cmd("nohlsearch")
+    opt.shiftround = true
+    opt.updatetime = 100
 
--- 防止包裹
-opt.wrap = true
+    -- 行号
+    opt.relativenumber = true -- 显示相对行号
+    opt.number = true -- 开启行号显示
 
--- 光标行
-opt.cursorline = true
+    -- 防止包裹
+    opt.wrap = true
 
--- 启用鼠标
-opt.mouse:append("a")
+    -- 光标行
+    opt.cursorline = true
 
--- 启用系统剪贴板
-opt.clipboard:append("unnamedplus")
+    -- 启用鼠标
+    opt.mouse:append("a")
 
--- 默认新窗口位置
-opt.splitright = true
-opt.splitbelow = true
+    -- 启用系统剪贴板
+    opt.clipboard:append("unnamedplus")
 
--- 搜索
-opt.ignorecase = true
-opt.smartcase = true
-opt.hlsearch = true
-opt.incsearch = true
-opt.smartcase = true
-opt.showmatch = true
+    -- 默认新窗口位置
+    opt.splitright = true
+    opt.splitbelow = true
 
--- 外观
-opt.termguicolors = true -- 终端真颜色
-opt.signcolumn = "yes" -- 左侧多一列用于debug等
-cmd[[colorscheme tokyonight-night]]
+    -- 搜索
+    opt.ignorecase = true
+    opt.smartcase = true
+    opt.hlsearch = true
+    opt.incsearch = true
+    opt.smartcase = true
+    opt.showmatch = true
 
--- tab
-opt.autoindent = true
-opt.tabstop = 4
-opt.shiftwidth = 4
-opt.softtabstop = 4
-opt.expandtab = true
-opt.cindent = true
-opt.smartindent = true
+    -- 外观
+    opt.termguicolors = true -- 终端真颜色
+    opt.signcolumn = "yes" -- 左侧多一列用于debug等
+    cmd[[colorscheme tokyonight-night]]
 
-opt.list = true
-opt.listchars = {
-	tab = "▸ ",
-	trail = "▫",
-}
-vim.opt.mouse = "a"
-vim.opt.encoding = "utf-8"
---vim.opt.guifont = "Cascadia_Code_PL:h12"
--- vim.opt.guifont = 'DejaVu_Sans_Mono_Font'
--- vim.opt.guifont = 'Fira_Code_Font'
+    -- tab
+    opt.autoindent = true
+    opt.tabstop = 4
+    opt.shiftwidth = 4
+    opt.softtabstop = 4
+    opt.expandtab = true
+    opt.cindent = true
+    opt.smartindent = true
 
-opt.autowrite = true
-opt.formatoptions = ""
-opt.scrolloff = 10 -- 向下滚动时留指定行
-opt.tw = 0
-opt.backspace = "indent,eol,start"
-opt.foldmethod = "indent"
-opt.foldlevel = 99
-opt.laststatus = 2
-opt.autochdir = true
-opt.clipboard = "unnamedplus"
-opt.completeopt = { "menu", "menuone", "noselect" } -- mostly just for cmp
-opt.conceallevel = 0 -- so that `` is visible in markdown files
-opt.lazyredraw = false
-opt.compatible = false
-opt.shell = "/bin/bash"
-opt.signcolumn = "yes"
-opt.swapfile = false
-opt.backup = false
-opt.writebackup = false
+    opt.list = true
+    opt.listchars = {
+        tab = "▸ ",
+        trail = "▫",
+    }
+    vim.opt.mouse = "a"
+    vim.opt.encoding = "utf-8"
+    --vim.opt.guifont = "Cascadia_Code_PL:h12"
+    -- vim.opt.guifont = 'DejaVu_Sans_Mono_Font'
+    -- vim.opt.guifont = 'Fira_Code_Font'
 
-opt.shortmess:append({ c = true })
-opt.whichwrap:append({ ["<"] = true, [">"] = true, [","] = true, h = true, l = true })
-cmd([[set iskeyword+=-]]) -- 将连字符 - 的单词是为一个
+    opt.autowrite = true
+    opt.formatoptions = ""
+    opt.scrolloff = 10 -- 向下滚动时留指定行
+    opt.tw = 0
+    opt.backspace = "indent,eol,start"
+    opt.foldmethod = "indent"
+    opt.foldlevel = 99
+    opt.laststatus = 2
+    opt.autochdir = true
+    opt.clipboard = "unnamedplus"
+    opt.completeopt = { "menu", "menuone", "noselect" } -- mostly just for cmp
+    opt.conceallevel = 0 -- so that `` is visible in markdown files
+    opt.lazyredraw = false
+    opt.compatible = false
+    opt.shell = "/bin/bash"
+    opt.signcolumn = "yes"
+    opt.swapfile = false
+    opt.backup = false
+    opt.writebackup = false
 
--- presistent undo
-vim.bo.undofile = true
-opt.undodir = vim.fn.expand("~/.config/nvim/.tmp/undo")
+    opt.shortmess:append({ c = true })
+    opt.whichwrap:append({ ["<"] = true, [">"] = true, [","] = true, h = true, l = true })
+    cmd([[set iskeyword+=-]]) -- 将连字符 - 的单词是为一个
 
-opt.spell = true
-opt.spelllang = { "en_us" }
+    -- presistent undo
+    vim.bo.undofile = true
+    opt.undodir = vim.fn.expand("~/.config/nvim/.tmp/undo")
 
--- Disables automatic commenting on newline
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "*" },
-	command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
-})
+    opt.spell = true
+    opt.spelllang = { "en_us" }
 
--- Highlight yanked text
-local au = vim.api.nvim_create_autocmd
-local ag = vim.api.nvim_create_augroup
--- Highlight the texts when you yanked
-au("TextYankPost", {
-	group = ag("yank_highlight", {}),
-	pattern = "*",
-	callback = function()
-		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 300 })
-	end,
-})
+    -- Disables automatic commenting on newline
+    vim.api.nvim_create_autocmd({ "FileType" }, {
+        pattern = { "*" },
+        command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
+    })
+
+    -- Highlight yanked text
+    local au = vim.api.nvim_create_autocmd
+    local ag = vim.api.nvim_create_augroup
+    -- Highlight the texts when you yanked
+    au("TextYankPost", {
+        group = ag("yank_highlight", {}),
+        pattern = "*",
+        callback = function()
+            vim.highlight.on_yank({ higroup = "IncSearch", timeout = 300 })
+        end,
+    })
+end
+return M

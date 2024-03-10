@@ -1,4 +1,5 @@
 local M = {}
+
 function M.config()
     require('hop').setup {
         keys = 'etovxqpdygfblzhckisuran',
