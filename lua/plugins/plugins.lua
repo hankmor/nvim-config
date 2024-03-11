@@ -75,7 +75,6 @@ M.config = function ()
         use({ "leoluz/nvim-dap-go" })
 
         -- 自动补全
-        use "hrsh7th/nvim-cmp"
         use "hrsh7th/cmp-vsnip"
         use "numToStr/Comment.nvim" -- gcc和gc注释
         use "windwp/nvim-autopairs" -- 自动补全括号
@@ -128,6 +127,15 @@ M.config = function ()
         use({
             'tigion/nvim-asciidoc-preview',
             run = 'cd server && npm install',
+        })
+
+        -- 直接在代码中显示语法错误
+        -- use {'dense-analysis/ale'}
+        use({
+            "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+            config = function()
+                require("lsp_lines").setup()
+            end,
         })
 
         -- Automatically set up your configuration after cloning packer.nvim
