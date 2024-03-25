@@ -1,1 +1,1 @@
-{}
+{"funct":{"prefix":"funct","body":["func TestNet(t *testing.T) {","\t$0","}"]}}

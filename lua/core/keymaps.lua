@@ -44,9 +44,9 @@ function M.config()
     ---- 取消搜索的高亮 ----
     km.set("n", "<leader>nh", ":nohl<CR>", opts)
 
-    km.set("n", "<F4>", ":q<CR>", opts)
-    km.set("n", "<F2>", ":w<CR>", opts)
-    km.set("n", "<F3>", ":wq<CR>", opts)
+    km.set("", "<F4>", ":q<CR>", opts)
+    km.set("", "<F2>", ":w<CR>", opts)
+    km.set("", "<F3>", ":wq<CR>", opts)
 
     -- 格式化代码
     km.set("n", "<leader>f", ":Neoformat<CR>", opts)
