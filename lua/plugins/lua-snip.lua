@@ -1,9 +1,6 @@
 local M = {}
 function M.config()
-	local luasnip_loader = require("luasnip.loaders.from_vscode")
-	luasnip_loader.lazy_load()
-	luasnip_loader.lazy_load({ paths = { "~/.config/nvim/snippets/" } })
-	--require("luasnip.loaders.from_vscode").lazy_load({paths = {"~/.config/nvim/snippets/"}})
+	require("luasnip.loaders.from_vscode").lazy_load({paths = {"~/.config/nvim/snippets/"}})
 
 	--local keymap = vim.api.nvim_set_keymap
 	--local opts = { noremap = true, silent = true }
@@ -17,6 +14,7 @@ function M.config()
 		region_check_events = "CursorHold,InsertLeave,InsertEnter",
 		delete_check_events = "TextChanged,InsertEnter",
 	})
+    -- require'luasnip'.filetype_extend("ruby", {"rails"})
 end
 
 return M

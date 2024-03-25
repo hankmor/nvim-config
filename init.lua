@@ -1,3 +1,4 @@
+buftype=""
 -- 在第一行，优先加载
 require("plugins.plugins").config()
 

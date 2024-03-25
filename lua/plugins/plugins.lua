@@ -61,7 +61,13 @@ M.config = function ()
         use({ "f3fora/cmp-spell" })
         use({ "hrsh7th/cmp-calc" })
         use({ "saadparwaiz1/cmp_luasnip" }) -- Snippets source for nvim-cmp
-        use({ "L3MON4D3/LuaSnip" }) -- Snippets plugin
+        use({
+            "L3MON4D3/LuaSnip",
+            -- follow latest release.
+            tag = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+            -- install jsregexp (optional!:).
+            run = "make install_jsregexp"
+        })
         use({ "rafamadriz/friendly-snippets" })
         use({ "ray-x/cmp-treesitter" })
         use({ "onsails/lspkind.nvim" })
