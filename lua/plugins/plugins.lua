@@ -138,6 +138,15 @@ M.config = function ()
             end,
         })
 
+        -- go扩展插件
+        use {'fatih/vim-go'}
+
+        -- snippets管理插件
+        use {
+            "chrisgrieser/nvim-scissors",
+            dependencies = "nvim-telescope/telescope.nvim", -- optional
+        }
+
         -- Automatically set up your configuration after cloning packer.nvim
         -- Put this at the end after all plugins
         if packer_bootstrap then

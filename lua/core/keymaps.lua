@@ -15,7 +15,7 @@ function M.config()
     -- 快速移动
     -- km.set("n", "J", "5j", opts)
     -- km.set("n", "K", "5k", opts)
-    km.set("n", "H", "0", opts)
+    km.set("n", "H", "^", opts)
     km.set("n", "L", "$", opts)
 
     km.set("n", "<M-s>", ":w<CR>", opts)
@@ -74,6 +74,9 @@ function M.config()
     km.set("n", "<leader>gl", ":Git pull<CR>", opts)
     km.set("n", "<leader>ga", ":Git add .<CR>", opts)
     km.set("n", "<leader>gc", ":Git commit -m", opts)
+
+    -- codes
+    km.set("", "<M-/>", ":gcc<CR>", opts)
 end
 
 return M
