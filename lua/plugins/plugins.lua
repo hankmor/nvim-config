@@ -13,12 +13,12 @@ end
 -- local packer_bootstrap = ensure_packer()
 
 -- 自动安装插件，而不是执行 packer sync
--- vim.cmd([[
---   augroup packer_user_config
---   autocmd!
---   autocmd BufWritePost plugins.lua source <afile> | PackerSync
---   augroup end
--- ]])
+vim.cmd([[
+  augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost plugins.lua source <afile> | PackerInstall
+  augroup end
+]])
 
 M.config = function ()
     require('packer').startup(function(use)
@@ -74,11 +74,14 @@ M.config = function ()
 
         -- languages
         use({ "mfussenegger/nvim-dap" })
+        -- dap中启用虚拟文本插件
         use({ "theHamsta/nvim-dap-virtual-text" })
-        use({ "rcarriga/nvim-dap-ui" })
-
+        use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
         use({ "olexsmir/gopher.nvim" })
+        -- dap 中自动调用 delve 调试 go
         use({ "leoluz/nvim-dap-go" })
+        -- 类型检查、api、文档完成插件
+        use({'folke/neodev.nvim'})
 
         -- 自动补全
         use "hrsh7th/cmp-vsnip"
@@ -137,12 +140,6 @@ M.config = function ()
 
         -- 直接在代码中显示语法错误
         -- use {'dense-analysis/ale'}
-        use({
-            "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-            config = function()
-                require("lsp_lines").setup()
-            end,
-        })
 
         -- go扩展插件
         use {'fatih/vim-go'}
@@ -153,10 +150,31 @@ M.config = function ()
             dependencies = "nvim-telescope/telescope.nvim", -- optional
         }
 
+        -- 窗口选择
+        use({"yorickpeterse/nvim-window"})
+
+        -- 断点调试ui插件 vimspector
+        -- use {'puremourning/vimspector'}
+        -- 断点调试nvim-dap
+
+        -- 显示函数签名
+        use { "ray-x/lsp_signature.nvim" }
+
+        -- 问题显示界面
+        use {
+            "folke/trouble.nvim",
+            dependencies = { "nvim-tree/nvim-web-devicons" },
+            opts = {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            },
+        }
+
         -- Automatically set up your configuration after cloning packer.nvim
         -- Put this at the end after all plugins
         if packer_bootstrap then
-            -- require('packer').sync()
+            require('packer').sync()
         end
     end)
 end

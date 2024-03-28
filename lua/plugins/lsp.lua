@@ -245,7 +245,7 @@ function lsp_config()
     -- Mappings.
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     local opts = { noremap = true, silent = true }
-    vim.keymap.set("n", "<space>E", vim.diagnostic.open_float, opts)
+    vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
     vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
@@ -263,7 +263,7 @@ function lsp_config()
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-        vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+        vim.keymap.set({"n","i"}, "<C-k>", vim.lsp.buf.signature_help, bufopts)
         vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
         vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
         vim.keymap.set("n", "<space>wl", function()

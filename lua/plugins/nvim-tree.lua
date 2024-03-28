@@ -22,7 +22,7 @@ function M.config()
     vim.g.loaded_netrwPlugin = 1
 
     -- 文档树切换改为 主键 + e
-    vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
+    vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", opts)
 
     -- set termguicolors to enable highlight groups
     vim.opt.termguicolors = true

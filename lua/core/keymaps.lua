@@ -44,9 +44,9 @@ function M.config()
     ---- 取消搜索的高亮 ----
     km.set("n", "<leader>nh", ":nohl<CR>", opts)
 
-    km.set("", "<F4>", ":q<CR>", opts)
-    km.set("", "<F2>", ":w<CR>", opts)
-    km.set("", "<F3>", ":wq<CR>", opts)
+    km.set({"n", "x"}, "<F3>", ":q<CR>", opts)
+    km.set({"n", "x"}, "<F2>", ":w<CR>", opts)
+    -- km.set({"n", "x"}, "<F3>", ":wq<CR>", opts)
 
     -- 格式化代码
     km.set("n", "<leader>f", ":Neoformat<CR>", opts)
@@ -56,6 +56,9 @@ function M.config()
     -- 翻页
     km.set("n", "<C-u>", "10k", opts)
     km.set("n", "<C-d>", "10j", opts)
+
+    -- 撤销
+    km.set({"n", "x"}, "<M-z>", ":u<cr>", opts)
 
     -- Move text up and down
     -- mac 中 M 为 option，windows下为 A

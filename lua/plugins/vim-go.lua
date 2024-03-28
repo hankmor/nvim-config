@@ -4,6 +4,7 @@ function M.config()
     vim.keymap.set("n", "<C-A-r>", ":GoRun<CR>", opts)
     vim.keymap.set("n", "<C-A-t>", ":GoTestFunc<CR>", opts)
     vim.keymap.set("n", "<C-A-i>", ":GoImpl<CR>", opts)
+    vim.keymap.set("n", "<C-S-i>", ":GoImports<CR>", opts)
 end
 
 return M
