@@ -45,8 +45,8 @@ function M.config()
     ---- 取消搜索的高亮 ----
     km.set("n", "<leader>nh", ":nohl<CR>", OPTS)
 
-    km.set({"n", "x"}, "<F3>", ":q<CR>", OPTS)
-    km.set({"n", "x"}, "<F2>", ":w<CR>", OPTS)
+    km.set({"n", "x"}, "wq", ":q<CR>", OPTS)
+    km.set({"n", "x"}, "we", ":w<CR>", OPTS)
     -- km.set({"n", "x"}, "<F3>", ":wq<CR>", opts)
 
     -- 格式化代码
@@ -55,8 +55,8 @@ function M.config()
     km.set("n", ">>", ":><CR>", OPTS)
 
     -- 翻页
-    km.set("n", "<A-f>", "15k", OPTS)
-    km.set("n", "<A-d>", "15j", OPTS)
+    km.set("n", "jj", "10k", OPTS)
+    km.set("n", "kk", "10j", OPTS)
 
     -- 撤销
     km.set({"n", "x"}, "<M-z>", ":u<cr>", OPTS)

@@ -105,8 +105,13 @@ function dapGo()
     VIM.keymap.set("n", "<leader>dt", dapgo.debug_test)
     VIM.keymap.set("n", "<leader>dl", dapgo.debug_last_test)
     dap.adapters.delve = {
+        path = "dlv",
+        initialize_timeout_sec = 20,
         type = 'server',
         port = '${port}',
+        args = {},
+        build_flags = "",
+        detached = true,
         executable = {
             command = 'dlv',
             args = {'dap', '-l', '127.0.0.1:${port}'},
@@ -116,13 +121,20 @@ function dapGo()
     dap.configurations.go = {
         {
             type = "delve",
+            name = "debug wire server",
+            request = "launch",
+            mode = "attach",
+            program = "${file}"
+        },
+        {
+            type = "delve",
             name = "Debug",
             request = "launch",
             program = "${file}"
         },
         {
             type = "delve",
-            name = "Debug test", -- configuration for debugging test files
+            name = "debug test", -- configuration for debugging test files
             request = "launch",
             mode = "test",
             program = "${file}"
@@ -130,7 +142,7 @@ function dapGo()
         -- works with go.mod packages and sub packages 
         {
             type = "delve",
-            name = "Debug test (go.mod)",
+            name = "debug test (go.mod)",
             request = "launch",
             mode = "test",
             program = "./${relativeFileDirname}"
