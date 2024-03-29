@@ -55,8 +55,8 @@ function M.config()
     km.set("n", ">>", ":><CR>", OPTS)
 
     -- 翻页
-    km.set("n", "<C-u>", "10k", OPTS)
-    km.set("n", "<C-d>", "10j", OPTS)
+    km.set("n", "<A-f>", "15k", OPTS)
+    km.set("n", "<A-d>", "15j", OPTS)
 
     -- 撤销
     km.set({"n", "x"}, "<M-z>", ":u<cr>", OPTS)
