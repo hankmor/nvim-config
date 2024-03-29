@@ -4,7 +4,7 @@ M.config = function ()
     local status_ok, _ = pcall(require, "project_nvim")
 
     if not status_ok then
-        vim.notify("project_nvim not found")
+        VIM.notify("project_nvim not found")
     end
 
     require"project_nvim".setup {
@@ -15,7 +15,7 @@ M.config = function ()
 
     -- 与telescope集成
     require('telescope').load_extension('projects')
-    vim.keymap.set("n", "<leader>pm", ":Telescope projects<cr>", opts)
+    VIM.keymap.set("n", "<leader>pm", ":Telescope projects<cr>", OPTS)
 end
 
 return M

@@ -3,7 +3,7 @@ function M.config()
     local status_ok, _ = pcall(require, "nvim-lastplace")
 
     if not status_ok then
-        vim.notify("nvim-lastplace not found")
+        VIM.notify("nvim-lastplace not found")
     end
 
     require'nvim-lastplace'.setup {

@@ -2,7 +2,7 @@ local M = {}
 
 function M.config()
     -- 开启终端真颜色
-    vim.opt.termguicolors = true
+    VIM.opt.termguicolors = true
 
     -- require("bufferline").setup {
     --     options = {
@@ -39,25 +39,25 @@ function M.config()
 
     --按键映射
     --nnoremap <silent> gb :BufferLinePick<CR>
-    vim.api.nvim_set_keymap("n", "bs", "<Cmd>BufferLinePick<CR>", { noremap = true, silent = true })
+    VIM.api.nvim_set_keymap("n", "bs", "<Cmd>BufferLinePick<CR>", { noremap = true, silent = true })
 
-    vim.api.nvim_set_keymap("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", "<leader>8", "<Cmd>BufferLineGoToBuffer 8<CR>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", "<leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>", { noremap = true, silent = true })
+    VIM.api.nvim_set_keymap("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", { noremap = true, silent = true })
+    VIM.api.nvim_set_keymap("n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", { noremap = true, silent = true })
+    VIM.api.nvim_set_keymap("n", "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", { noremap = true, silent = true })
+    VIM.api.nvim_set_keymap("n", "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", { noremap = true, silent = true })
+    VIM.api.nvim_set_keymap("n", "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", { noremap = true, silent = true })
+    VIM.api.nvim_set_keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", { noremap = true, silent = true })
+    VIM.api.nvim_set_keymap("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", { noremap = true, silent = true })
+    VIM.api.nvim_set_keymap("n", "<leader>8", "<Cmd>BufferLineGoToBuffer 8<CR>", { noremap = true, silent = true })
+    VIM.api.nvim_set_keymap("n", "<leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>", { noremap = true, silent = true })
 
     -- bufferline操作
-    vim.keymap.set("n", "bn", ":BufferLineCycleNext<CR>", opts) -- 选择后一个
-    vim.keymap.set("n", "bp", ":BufferLineCyclePrev<CR>", opts) -- 选择前一个
-    vim.keymap.set("n", "bco", ":BufferLineCloseOthers<CR>", opts) -- 关闭其他
+    VIM.keymap.set("n", "bn", ":BufferLineCycleNext<CR>", OPTS) -- 选择后一个
+    VIM.keymap.set("n", "bp", ":BufferLineCyclePrev<CR>", OPTS) -- 选择前一个
+    VIM.keymap.set("n", "bco", ":BufferLineCloseOthers<CR>", OPTS) -- 关闭其他
     -- vim.keymap.set("n", "bc", "bufdelete<CR>", opts) -- 关闭当前
-    vim.keymap.set("n", "bc", "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>", opts) -- 关闭当前
-    vim.keymap.set("n", "bs", ":BufferLinePick<CR>", opts) -- 选择
+    VIM.keymap.set("n", "bc", "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>", OPTS) -- 关闭当前
+    VIM.keymap.set("n", "bs", ":BufferLinePick<CR>", OPTS) -- 选择
 
 
     require("bufferline").setup({

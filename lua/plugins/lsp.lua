@@ -7,8 +7,8 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local luasnip = require("luasnip")
 
 local has_words_before = function()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    local line, col = unpack(VIM.api.nvim_win_get_cursor(0))
+    return col ~= 0 and VIM.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 local types = require("cmp.types")
@@ -93,8 +93,8 @@ function cmp_config()
                 if cmp.visible() then
                     cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
                 elseif require("luasnip").expand_or_jumpable() then
-                    vim.fn.feedkeys(
-                        vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true),
+                    VIM.fn.feedkeys(
+                        VIM.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true),
                         ""
                     )
                 else
@@ -128,7 +128,7 @@ function cmp_config()
                 name = "buffer",
                 option = {
                     get_bufnrs = function()
-                        return vim.api.nvim_list_bufs()
+                        return VIM.api.nvim_list_bufs()
                     end,
                 },
             },
@@ -163,7 +163,7 @@ function cmp_config()
                     -- Get the full snippet (and only keep first line)
                     local word = entry:get_insert_text()
                     if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
-                        word = vim.lsp.util.parse_snippet(word)
+                        word = VIM.lsp.util.parse_snippet(word)
                     end
                     word = str.oneline(word)
                     if
@@ -202,7 +202,7 @@ end
 
 function diagnostic_config()
     local sign = function(opts)
-        vim.fn.sign_define(opts.name, {
+        VIM.fn.sign_define(opts.name, {
             texthl = opts.name,
             text = opts.text,
             numhl = "",
@@ -220,7 +220,7 @@ function diagnostic_config()
     --sign({ name = "DiagnosticSignHint", text = "" })
     --sign({ name = "DiagnosticSignInfo", text = "" })
 
-    vim.diagnostic.config({
+    VIM.diagnostic.config({
         virtual_text = false,
         severity_sort = true,
         signs = true,
@@ -238,43 +238,43 @@ end
 function lsp_config()
     --------------------------------lspconfig-----------------------
     local lspconfig = require("lspconfig")
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-    vim.lsp.handlers["textDocument/signatureHelp"] =
-    vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+    VIM.lsp.handlers["textDocument/hover"] = VIM.lsp.with(VIM.lsp.handlers.hover, { border = "rounded" })
+    VIM.lsp.handlers["textDocument/signatureHelp"] =
+    VIM.lsp.with(VIM.lsp.handlers.signature_help, { border = "rounded" })
 
     -- Mappings.
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     local opts = { noremap = true, silent = true }
-    vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-    vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+    VIM.keymap.set("n", "<space>e", VIM.diagnostic.open_float, opts)
+    VIM.keymap.set("n", "[d", VIM.diagnostic.goto_prev, opts)
+    VIM.keymap.set("n", "]d", VIM.diagnostic.goto_next, opts)
+    VIM.keymap.set("n", "<space>q", VIM.diagnostic.setloclist, opts)
 
     -- Use an on_attach function to only map the following keys
     -- after the language server attaches to the current buffer
     local on_attach = function(client, bufnr)
         -- Enable completion triggered by <c-x><c-o>
-        vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+        VIM.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
         -- Mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local bufopts = { noremap = true, silent = true, buffer = bufnr }
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-        vim.keymap.set({"n","i"}, "<C-k>", vim.lsp.buf.signature_help, bufopts)
-        vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-        vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-        vim.keymap.set("n", "<space>wl", function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        VIM.keymap.set("n", "gD", VIM.lsp.buf.declaration, bufopts)
+        VIM.keymap.set("n", "gd", VIM.lsp.buf.definition, bufopts)
+        VIM.keymap.set("n", "K", VIM.lsp.buf.hover, bufopts)
+        VIM.keymap.set("n", "gi", VIM.lsp.buf.implementation, bufopts)
+        VIM.keymap.set({"n","i"}, "<C-k>", VIM.lsp.buf.signature_help, bufopts)
+        VIM.keymap.set("n", "<space>wa", VIM.lsp.buf.add_workspace_folder, bufopts)
+        VIM.keymap.set("n", "<space>wr", VIM.lsp.buf.remove_workspace_folder, bufopts)
+        VIM.keymap.set("n", "<space>wl", function()
+            print(VIM.inspect(VIM.lsp.buf.list_workspace_folders()))
         end, bufopts)
-        vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-        vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
-        vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-        vim.keymap.set("n", "<space>F", function()
-            vim.lsp.buf.format({ async = true })
+        VIM.keymap.set("n", "<space>D", VIM.lsp.buf.type_definition, bufopts)
+        VIM.keymap.set("n", "<space>rn", VIM.lsp.buf.rename, bufopts)
+        VIM.keymap.set("n", "<space>ca", VIM.lsp.buf.code_action, bufopts)
+        VIM.keymap.set("n", "gr", VIM.lsp.buf.references, bufopts)
+        VIM.keymap.set("n", "<space>F", function()
+            VIM.lsp.buf.format({ async = true })
         end, bufopts)
     end
 
@@ -284,7 +284,7 @@ function lsp_config()
     }
 
     local lsp_defaults = lspconfig.util.default_config
-    lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, capabilities)
+    lsp_defaults.capabilities = VIM.tbl_deep_extend("force", lsp_defaults.capabilities, capabilities)
 
     local servers = {
         "clangd",

@@ -11,11 +11,11 @@ function M.config()
     })
     require "lsp_signature".setup(cfg)
 
-    vim.keymap.set({ 'n', "i" }, '<C-k>', function()       require('lsp_signature').toggle_float_win()
+    VIM.keymap.set({ 'n', "i" }, '<C-p>', function()       require('lsp_signature').toggle_float_win()
     end, { silent = true, noremap = true, desc = 'toggle signature' })
 
-    vim.keymap.set({ 'n', "i" }, '<C-K>', function()
-        vim.lsp.buf.signature_help()
+    VIM.keymap.set({ 'n', "i" }, '<C-K>', function()
+        VIM.lsp.buf.signature_help()
     end, { silent = true, noremap = true, desc = 'toggle signature' })
 
 end

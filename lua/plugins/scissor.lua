@@ -5,13 +5,13 @@ function M.config()
     require("scissors").setup ({
         snippetDir = snippetsDir,
     })
-    vim.keymap.set("n", "<leader>se", function() 
+    VIM.keymap.set("n", "<leader>se", function() 
         require("scissors").editSnippet() 
-    end, opts)
+    end, OPTS)
     -- When used in visual mode prefills the selection as body.
-    vim.keymap.set({ "n", "x" }, "<leader>sa", function() 
+    VIM.keymap.set({ "n", "x" }, "<leader>sa", function() 
         require("scissors").addNewSnippet() 
-    end, opts)
+    end, OPTS)
 end
 
 return M

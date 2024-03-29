@@ -1,10 +1,10 @@
 local M = {}
 function M.config()
-    vim.keymap.set("", "<C-A-l>", ":GoFmt<CR>", opts)
-    vim.keymap.set("n", "<C-A-r>", ":GoRun<CR>", opts)
-    vim.keymap.set("n", "<C-A-t>", ":GoTestFunc<CR>", opts)
-    vim.keymap.set("n", "<C-A-i>", ":GoImpl<CR>", opts)
-    vim.keymap.set("n", "<C-S-i>", ":GoImports<CR>", opts)
+    VIM.keymap.set("", "<C-A-l>", ":GoFmt<CR>", OPTS)
+    VIM.keymap.set("n", "<C-A-r>", ":GoRun<CR>", OPTS)
+    VIM.keymap.set("n", "<C-A-t>", ":GoTestFunc<CR>", OPTS)
+    VIM.keymap.set("n", "<C-A-i>", ":GoImpl<CR>", OPTS)
+    VIM.keymap.set("n", "<C-S-i>", ":GoImports<CR>", OPTS)
 end
 
 return M

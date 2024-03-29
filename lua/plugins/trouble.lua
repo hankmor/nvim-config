@@ -3,7 +3,7 @@ local M = {}
 function M.config()
     -- local trouble = require("folke/trouble.nvim") 
     -- trouble.opts = {
-    opts = {
+    OPTS = {
         position = "bottom", -- position of the list can be: bottom, top, left, right
         height = 10, -- height of the trouble list when position is top or bottom
         width = 50, -- width of the list when position is left or right
@@ -74,12 +74,12 @@ function M.config()
         },
     }
 
-    vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
-    vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
-    vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
-    vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
-    vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
-    vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
+    VIM.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
+    VIM.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+    VIM.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+    VIM.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+    VIM.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+    VIM.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
 end
 
 return M

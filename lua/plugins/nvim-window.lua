@@ -22,7 +22,7 @@ function M.config()
     })
 
     
-    vim.keymap.set({"i", "n", "v"}, "<leader>w", "<cmd>lua require('nvim-window').pick()<cr>", opts)
+    VIM.keymap.set({"i", "n", "v"}, "<leader>w", "<cmd>lua require('nvim-window').pick()<cr>", OPTS)
 end
 
 return M

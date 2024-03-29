@@ -1,19 +1,19 @@
 local M = {}
-local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-        vim.cmd [[packadd packer.nvim]]
-        return true
-    end
-    return false
-end
+-- local ensure_packer = function()
+--     local fn = VIM.fn
+--     local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+--     if fn.empty(fn.glob(install_path)) > 0 then
+--         fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+--         VIM.cmd [[packadd packer.nvim]]
+--         return true
+--     end
+--     return false
+-- end
 
 -- local packer_bootstrap = ensure_packer()
 
 -- 自动安装插件，而不是执行 packer sync
-vim.cmd([[
+VIM.cmd([[
   augroup packer_user_config
   autocmd!
   autocmd BufWritePost plugins.lua source <afile> | PackerInstall
@@ -30,7 +30,7 @@ M.config = function ()
         use 'folke/tokyonight.nvim' -- 主题  
         use {
             'nvim-lualine/lualine.nvim',  -- 状态栏
-            requires = { 'kyazdani42/nvim-web-devicons', opt = true }  -- 状态栏图标
+            -- requires = { 'kyazdani42/nvim-web-devicons', opt = false }  -- 状态栏图标
         }
 
         use {
@@ -45,34 +45,46 @@ M.config = function ()
         -- 用ctrl-hjkl来切换不同窗口
         use "christoomey/vim-tmux-navigator"
 
-        use "nvim-treesitter/nvim-treesitter" -- 语法高亮
-        use "p00f/nvim-ts-rainbow" -- 配合treesitter，不同括号颜色区分
+        -- 语法高亮
+        use { "nvim-treesitter/nvim-treesitter",run = ':TSUpdate' }
+        -- 配合treesitter，不同括号颜色区分
+        use "p00f/nvim-ts-rainbow"
 
         -- 语法提示 lsp
-        use({ "williamboman/mason.nvim" })
-        use({ "williamboman/mason-lspconfig.nvim" })
-        use({ "neovim/nvim-lspconfig" })
-        use({ "hrsh7th/nvim-cmp" }) -- Autocompletion plugin
-        use({ "hrsh7th/cmp-nvim-lsp" }) -- LSP source for nvim-cmp
-        use({ "hrsh7th/cmp-buffer" })
-        use({ "hrsh7th/cmp-path" }) -- 补全文件路径
-        use({ "hrsh7th/cmp-cmdline" })
-        use({ "hrsh7th/cmp-nvim-lua" })
-        use({ "f3fora/cmp-spell" })
-        use({ "hrsh7th/cmp-calc" })
-        use({ "saadparwaiz1/cmp_luasnip" }) -- Snippets source for nvim-cmp
-        use({
-            "L3MON4D3/LuaSnip",
-            -- follow latest release.
-            tag = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-            -- install jsregexp (optional!:).
-            run = "make install_jsregexp"
-        })
-        use({ "rafamadriz/friendly-snippets" })
-        use({ "ray-x/cmp-treesitter" })
-        use({ "onsails/lspkind.nvim" })
+        -- Language Support
+        use {
+            'VonHeikemen/lsp-zero.nvim',
+            branch = 'v3.x',
+            requires = {
+                -- LSP Support
+                {'williamboman/mason.nvim'},
+                {'williamboman/mason-lspconfig.nvim'},
 
-        -- languages
+                {'neovim/nvim-lspconfig'},             -- Required
+
+                -- Autocompletion
+                {'hrsh7th/nvim-cmp'},
+                {'hrsh7th/cmp-nvim-lsp'},
+                {'hrsh7th/cmp-buffer'},
+                {'hrsh7th/cmp-path'},
+                { "hrsh7th/cmp-cmdline" },
+                {'saadparwaiz1/cmp_luasnip'},
+                {'hrsh7th/cmp-nvim-lua'},
+                { "ray-x/cmp-treesitter" },
+                { "f3fora/cmp-spell" },
+                { "hrsh7th/cmp-calc" },
+
+                -- Snippets
+                {'L3MON4D3/LuaSnip', tag = "v2.*", run = "make install_jsregexp" },
+                {'rafamadriz/friendly-snippets'},
+
+                -- 显示函数签名
+                { "ray-x/lsp_signature.nvim" },
+                { "onsails/lspkind.nvim" },
+            }
+        }
+
+        -- 断点调试
         use({ "mfussenegger/nvim-dap" })
         -- dap中启用虚拟文本插件
         use({ "theHamsta/nvim-dap-virtual-text" })
@@ -153,13 +165,6 @@ M.config = function ()
         -- 窗口选择
         use({"yorickpeterse/nvim-window"})
 
-        -- 断点调试ui插件 vimspector
-        -- use {'puremourning/vimspector'}
-        -- 断点调试nvim-dap
-
-        -- 显示函数签名
-        use { "ray-x/lsp_signature.nvim" }
-
         -- 问题显示界面
         use {
             "folke/trouble.nvim",
@@ -171,10 +176,24 @@ M.config = function ()
             },
         }
 
+        -- undo tree
+        use {
+            "jiaoshijie/undotree",
+            requires = {
+                "nvim-lua/plenary.nvim",
+            },
+        }
+
+        -- 显示按键绑定
+        use { "folke/which-key.nvim", }
+
+        -- 多终端管理
+        use {"akinsho/toggleterm.nvim"}
+
         -- Automatically set up your configuration after cloning packer.nvim
         -- Put this at the end after all plugins
         if packer_bootstrap then
-            require('packer').sync()
+            require('packer').install()
         end
     end)
 end

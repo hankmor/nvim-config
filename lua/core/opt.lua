@@ -1,8 +1,8 @@
 local M = {}
 
 function M.config()
-    local opt = vim.opt
-    local cmd = vim.cmd
+    local opt = VIM.opt
+    local cmd = VIM.cmd
 
     -- basics
     cmd("syntax on")
@@ -58,8 +58,8 @@ function M.config()
         tab = "▸ ",
         trail = "▫",
     }
-    vim.opt.mouse = "a"
-    vim.opt.encoding = "utf-8"
+    VIM.opt.mouse = "a"
+    VIM.opt.encoding = "utf-8"
     --vim.opt.guifont = "Cascadia_Code_PL:h12"
     -- vim.opt.guifont = 'DejaVu_Sans_Mono_Font'
     -- vim.opt.guifont = 'Fira_Code_Font'
@@ -89,27 +89,27 @@ function M.config()
     cmd([[set iskeyword+=-]]) -- 将连字符 - 的单词是为一个
 
     -- presistent undo
-    vim.bo.undofile = true
-    opt.undodir = vim.fn.expand("~/.config/nvim/.tmp/undo")
+    VIM.bo.undofile = true
+    opt.undodir = VIM.fn.expand("~/.config/nvim/.tmp/undo")
 
     opt.spell = true
     opt.spelllang = { "en_us" }
 
     -- Disables automatic commenting on newline
-    vim.api.nvim_create_autocmd({ "FileType" }, {
+    VIM.api.nvim_create_autocmd({ "FileType" }, {
         pattern = { "*" },
         command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
     })
 
     -- Highlight yanked text
-    local au = vim.api.nvim_create_autocmd
-    local ag = vim.api.nvim_create_augroup
+    local au = VIM.api.nvim_create_autocmd
+    local ag = VIM.api.nvim_create_augroup
     -- Highlight the texts when you yanked
     au("TextYankPost", {
         group = ag("yank_highlight", {}),
         pattern = "*",
         callback = function()
-            vim.highlight.on_yank({ higroup = "IncSearch", timeout = 300 })
+            VIM.highlight.on_yank({ higroup = "IncSearch", timeout = 300 })
         end,
     })
 end

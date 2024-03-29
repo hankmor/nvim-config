@@ -11,21 +11,21 @@ local function my_on_attach(bufnr)
     api.config.mappings.default_on_attach(bufnr)
 
     -- custom mappings
-    vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
-    vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
-    vim.keymap.set('n', '<leader>-c',     api.node.navigate.parent_close,                  opts('Help'))
+    VIM.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
+    VIM.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+    VIM.keymap.set('n', '<leader>-c',     api.node.navigate.parent_close,                  opts('Help'))
 end
 
 function M.config()
     -- 禁用netrw
-    vim.g.loaded_netrw = 1
-    vim.g.loaded_netrwPlugin = 1
+    VIM.g.loaded_netrw = 1
+    VIM.g.loaded_netrwPlugin = 1
 
     -- 文档树切换改为 主键 + e
-    vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", opts)
+    VIM.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", OPTS)
 
     -- set termguicolors to enable highlight groups
-    vim.opt.termguicolors = true
+    VIM.opt.termguicolors = true
 
 
     -- empty setup using defaults
@@ -48,7 +48,7 @@ function M.config()
         },
         -- 开始重新更新目录到焦点文件
         update_focused_file = {
-            enable = true,
+            enable = false,
             update_cwd = false,
             update_root = true,
         },

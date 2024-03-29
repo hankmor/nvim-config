@@ -15,8 +15,8 @@ function M.config()
 
     -- 下面会用到这个函数
     local check_backspace = function()
-        local col = vim.fn.col "." - 1
-        return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+        local col = VIM.fn.col "." - 1
+        return col == 0 or VIM.fn.getline("."):sub(col, col):match "%s"
     end
 
 

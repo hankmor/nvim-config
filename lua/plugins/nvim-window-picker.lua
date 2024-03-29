@@ -121,7 +121,7 @@ function M.config()
         },
     }) 
 
-    vim.keymap.set({"n", "i", "v"}, "<leader>w", "<cmd>lua require('window-picker').pick_window({ hint = 'floating-big-letter' })<cr>", opts)
+    VIM.keymap.set({"n", "i", "v"}, "<leader>w", "<cmd>lua require('window-picker').pick_window({ hint = 'floating-big-letter' })<cr>", OPTS)
 end
 
 return M
