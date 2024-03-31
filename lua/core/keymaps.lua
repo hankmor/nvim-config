@@ -51,8 +51,8 @@ function M.config()
     vim.keymap.set("n", ">>", ":><CR>", OPTS)
 
     -- 翻页
-    vim.keymap.set("n", "jj", "10k", OPTS)
-    vim.keymap.set("n", "kk", "10j", OPTS)
+    vim.keymap.set("n", "<M-d>", "10k", OPTS)
+    vim.keymap.set("n", "<M-f>", "10j", OPTS)
 
     -- 撤销
     vim.keymap.set({"n", "x"}, "<M-z>", ":u<cr>", OPTS)
@@ -74,9 +74,6 @@ function M.config()
     vim.keymap.set("n", "<leader>gl", ":Git pull<CR>", OPTS)
     vim.keymap.set("n", "<leader>ga", ":Git add .<CR>", OPTS)
     vim.keymap.set("n", "<leader>gc", ":Git commit -m", OPTS)
-
-    -- codes
-    vim.keymap.set("", "<M-/>", ":gcc<CR>", OPTS)
 end
 
 return M
