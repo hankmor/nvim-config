@@ -48,7 +48,7 @@ function M.config()
         },
         -- 开始重新更新目录到焦点文件
         update_focused_file = {
-            enable = false,
+            enable = true,
             update_cwd = false,
             update_root = true,
         },

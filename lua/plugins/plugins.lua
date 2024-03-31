@@ -81,15 +81,25 @@ M.config = function ()
                 -- 显示函数签名
                 { "ray-x/lsp_signature.nvim" },
                 { "onsails/lspkind.nvim" },
+                -- go lsp support
+                -- { 'ray-x/go.nvim' },
+                -- { 'ray-x/navigator.lua', requires = {
+                --     { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+                --     { 'neovim/nvim-lspconfig' },
+                -- }}
+                use({
+                    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+                })
             }
         }
+
 
         -- 断点调试
         use({ "mfussenegger/nvim-dap" })
         -- dap中启用虚拟文本插件
         use({ "theHamsta/nvim-dap-virtual-text" })
         use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
-        use({ "olexsmir/gopher.nvim" })
+        -- use({ "olexsmir/gopher.nvim" })
         -- dap 中自动调用 delve 调试 go
         use({ "leoluz/nvim-dap-go" })
         -- 类型检查、api、文档完成插件
@@ -111,7 +121,7 @@ M.config = function ()
             branch = 'v2', -- optional but strongly recommended
         }
         -- 格式化代码
-        use 'sbdchd/neoformat'
+        -- use 'sbdchd/neoformat'
 
         -- 更改包裹字符
         use ({"kylechui/nvim-surround", tab = "*", config = function ()
@@ -177,15 +187,15 @@ M.config = function ()
         }
 
         -- undo tree
-        use {
-            "jiaoshijie/undotree",
-            requires = {
-                "nvim-lua/plenary.nvim",
-            },
-        }
+        -- use {
+        --     "jiaoshijie/undotree",
+        --     requires = {
+        --         "nvim-lua/plenary.nvim",
+        --     },
+        -- }
 
         -- 显示按键绑定
-        use { "folke/which-key.nvim", }
+        -- use { "folke/which-key.nvim", }
 
         -- 多终端管理
         use {"akinsho/toggleterm.nvim"}
