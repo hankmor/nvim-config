@@ -42,11 +42,11 @@ return {
             -- 开始重新更新目录到焦点文件
             update_focused_file = {
                 enable = true,
-                update_cwd = false,
+                update_cwd = true,
                 update_root = false,
             },
             renderer = {
-                group_empty = false,
+                group_empty = true,
                 highlight_git = true,
                 icons = {
                     show = {
@@ -55,9 +55,9 @@ return {
                     }
                 }
             },
-            filters = {
-                dotfiles = true,
-            },
+            -- filters = {
+            --     dotfiles = false,
+            -- },
         })
 
         -- custom mappings

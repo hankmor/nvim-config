@@ -1,4 +1,7 @@
 function keymap()
+    vim.fn.sign_define('DapBreakpoint',{ text ='🔴', texthl ='', linehl ='', numhl =''})
+    vim.fn.sign_define('DapStopped',{ text ='⚪', texthl ='', linehl ='', numhl =''})
+
     vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
     vim.keymap.set('n', '<F8>', function() require('dap').step_over() end)
     vim.keymap.set('n', '<F7>', function() require('dap').step_into() end)
@@ -96,6 +99,7 @@ function dapGo()
         initialize_timeout_sec = 20,
         type = 'server',
         port = '${port}',
+        host = "127.0.0.1",
         args = {},
         build_flags = "",
         detached = true,
@@ -108,10 +112,29 @@ function dapGo()
     dap.configurations.go = {
         {
             type = "delve",
-            name = "debug wire server",
+            name = "Launch Package",
             request = "launch",
-            mode = "attach",
-            program = "${file}"
+            program = "${fileDirname}",
+        },
+        {
+            type = "delve",
+            name = "Exec bin",
+            request = "exec",
+            file = "${file}",
+        },
+        {
+            type = "delve",
+            name = "Attach Picked Process",
+            request = "attach",
+            processId = require("dap.utils").pick_process
+            -- program = "${file}"
+        },
+        {
+            type = "delve",
+            name = "Attach (127.0.0.1:8000)",
+            mode = "remote",
+            request = "attach",
+            port = "8000"
         },
         {
             type = "delve",
