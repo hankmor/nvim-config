@@ -2,4 +2,3 @@ plugin
 .tmp
 .Ds_store
 lazy-lock.json
-lua/plugins/demo.go
