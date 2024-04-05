@@ -42,7 +42,6 @@ function M.config()
     -- 外观
     opt.termguicolors = true -- 终端真颜色
     opt.signcolumn = "yes" -- 左侧多一列用于debug等
-    cmd[[colorscheme tokyonight-night]]
 
     -- tab
     opt.autoindent = true

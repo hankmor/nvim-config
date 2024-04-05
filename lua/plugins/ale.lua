@@ -1,4 +1,5 @@
 return {
+    -- 语法检查
 	'dense-analysis/ale',
 	config = function()
 		-- Configuration goes here.

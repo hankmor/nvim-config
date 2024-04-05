@@ -1,3 +1,4 @@
 plugin
 .tmp
 .Ds_store
+lazy-lock.json

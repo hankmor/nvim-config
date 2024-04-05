@@ -23,8 +23,8 @@ return {
 
         -- setup with some options
         require("nvim-tree").setup({
-            sync_root_with_cwd = true,
-            respect_buf_cwd = true,
+            sync_root_with_cwd = false,
+            respect_buf_cwd = false,
             on_attach = my_on_attach,
             sort = {
                 sorter = "case_sensitive",
@@ -33,17 +33,19 @@ return {
                 -- 文件浏览器展示位置，左侧：left, 右侧：right
                 side = "left",
                 -- 行号是否显示
-                relativenumber = false,
+                relativenumber = true,
                 signcolumn = "yes", -- 显示图标
                 width = 30,
-                number = false,
-                adaptive_size = true,
+                number = true,
+                adaptive_size = false,
             },
             -- 开始重新更新目录到焦点文件
             update_focused_file = {
-                enable = true,
-                update_cwd = true,
+                enable = false,
+                update_cwd = false,
                 update_root = false,
+                ignore_list = {},
+                exclude = false,
             },
             renderer = {
                 group_empty = true,
@@ -53,14 +55,16 @@ return {
                         file = true,
                         folder = true,
                     }
-                }
+                },
+                special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", ".gitignore"}
             },
-            -- filters = {
-            --     dotfiles = false,
-            -- },
+            filters = {
+                dotfiles = false,
+            },
         })
 
         -- custom mappings
         vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>", OPTS)
+        vim.keymap.set("n", "<leader>o", ":NvimTreeFindFile<CR>", OPTS)
     end,
 }

@@ -16,7 +16,15 @@ local function initLazy()
     vim.opt.rtp:prepend(lazypath)
 
     -- 从plugins目录加载插件
-    require("lazy").setup("plugins")
+    require("lazy").setup("plugins", {
+        ui = {
+            change_detection = {
+                -- automatically check for config file changes and reload the ui
+                enabled = false,
+                notify = false, -- get a notification when changes are found
+            },
+        }
+    })
 end
 
 -- init lazy

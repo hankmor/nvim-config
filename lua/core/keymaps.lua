@@ -51,8 +51,8 @@ function M.config()
     vim.keymap.set("n", ">>", ":><CR>", OPTS)
 
     -- 翻页
-    vim.keymap.set("n", "<M-d>", "10k", OPTS)
-    vim.keymap.set("n", "<M-f>", "10j", OPTS)
+    vim.keymap.set("n", "<M-d>", "10j", OPTS)
+    vim.keymap.set("n", "<M-f>", "10k", OPTS)
 
     -- 撤销
     vim.keymap.set({"n", "x"}, "<M-z>", ":u<cr>", OPTS)
@@ -63,6 +63,8 @@ function M.config()
     vim.keymap.set("n", "<M-down>", ":m .+1<CR>", OPTS)
     vim.keymap.set("v", "<M-down>", ":m '>+1<CR>gv=gv", OPTS)
     vim.keymap.set("v", "<M-up>", ":m '<-2<CR>gv=gv", OPTS)
+    vim.keymap.set('n', '<M-left>', [[<Cmd>wincmd b<CR>]], opts)
+    vim.keymap.set('n', '<M-right>', [[<Cmd>wincmd w<CR>]], opts)
 
     -- dashboard
     vim.keymap.set("n", "<leader>db", ":Dashboard<CR>", OPTS)

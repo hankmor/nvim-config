@@ -10,7 +10,7 @@ function keymap()
     vim.keymap.set('n', '<F9>', function() require('dap').step_out() end)
     vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
     vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
-    vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, VIM.fn.input('Log point message: ')) end)
+    vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
     vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
     vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
     vim.keymap.set("n", "<leader>dn",  "<Cmd>lua require('dap').terminate()<CR>", OPTS)
@@ -102,12 +102,12 @@ function dapGo()
         type = 'server',
         port = '${port}',
         host = "127.0.0.1",
-        args = {},
+        args = {"-ip", "ip"},
         build_flags = "",
         detached = true,
         executable = {
             command = 'dlv',
-            args = {'dap', '-l', '127.0.0.1:${port}'},
+            args = {'dap', '-l', '127.0.0.1:${port}', "--log", "--log-output='logs/dap'"},
         }
     }
     -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
@@ -117,13 +117,14 @@ function dapGo()
             name = "Launch Package",
             request = "launch",
             program = "${fileDirname}",
+            args = {},
         },
-        {
-            type = "delve",
-            name = "Exec bin",
-            request = "exec",
-            file = "${file}",
-        },
+        -- {
+        --     type = "delve",
+        --     name = "Exec bin",
+        --     request = "exec",
+        --     file = "${file}",
+        -- },
         {
             type = "delve",
             name = "Attach Picked Process",
