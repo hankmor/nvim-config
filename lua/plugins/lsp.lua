@@ -133,10 +133,6 @@ return {
             })
         end
 
-        local function config_go()
-            require('go').setup({})
-        end
-
         local function config_lsp_signature() 
             --  config lsp signature
             local cfg = {
@@ -304,7 +300,6 @@ return {
         lsp_config()
         cmp_config()
         diagnostic_config()
-        config_go()
         config_lsp_signature()
         config_luasnip()
     end

@@ -13,6 +13,10 @@ return {
                             -- actions.which_key shows the mappings for your picker,
                             -- e.g. git_{create, delete, ...}_branch for the git_branches picker
                             ["<C-h>"] = "which_key"
+                            -- ["<M-f>"] = "preview_scrolling_up",
+                            -- ["<M-d>"] = "preview_scrolling_down",
+                            -- ["<M-a>"] = "results_scrolling_left",
+                            -- ["<M-c>"] = "results_scrolling_right",
                         }
                     }
                 },
@@ -35,6 +39,7 @@ return {
             }
 
             local builtin = require('telescope.builtin')
+            -- local actions = require("telescope.actions")
 
             -- 进入telescope页面会是插入模式，回到正常模式就可以用j和k来移动了
             -- pcikers
@@ -46,6 +51,11 @@ return {
             vim.keymap.set('n', 'fs', builtin.grep_string, {cwd = root}) -- 在当前工作目录中的光标或所选内容下搜索字符串
             vim.keymap.set('n', 'fc', builtin.command_history, {}) -- 列出最近执行的命令
             vim.keymap.set('n', 'fcs', builtin.colorscheme, {}) -- 列出所有可用得主题
+
+            -- vim.keymap.set('n', '<M-f>', actions.preview_scrolling_up, {})
+            -- vim.keymap.set('n', '<M-d>', actions.preview_scrolling_down, {})
+            -- vim.keymap.set('n', '<M-a>', actions.preview_scrolling_left, {})
+            -- vim.keymap.set('n', '<M-c>', actions.preview_scrolling_right, {})
 
             -- lsp picker
 
