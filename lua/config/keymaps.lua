@@ -21,6 +21,15 @@ end)
 vim.keymap.set({ "n", "i" }, "<M-S-left>", "^")
 vim.keymap.set({ "n", "i" }, "<M-S-right>", "$")
 
+-- fast entter command
+vim.keymap.set("n", ";", ":")
+
+-- fast comment
+vim.keymap.set("n", "<leader>/", "<cmd>gcc<CR>")
+
+-- fast show dashboard
+vim.keymap.set({ "n", "i" }, "<leader>;", "<cmd>Dashboard<CR>")
+
 -- Resize window fastly
 vim.keymap.set({ "n", "i" }, "<M-up>", ":res -5<cr>")
 vim.keymap.set({ "n", "i" }, "<M-down>", ":res +5<cr>")
