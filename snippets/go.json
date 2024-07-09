@@ -1,0 +1,1 @@
+{"gorm":{"prefix":"gorm","body":"`gorm:\"$1;default:$2;comment:'$3'\"`"},"funct":{"body":["func Test$1(t *testing.T) {","\t$2","}"],"prefix":"funct"},"mapst":{"body":"`mapstructure:\"$1\" yaml:\"$2\"`","prefix":"mapst"}}
