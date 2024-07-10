@@ -2,6 +2,8 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+local wk = require("which-key")
+
 -- dap keymapping to Jetbrains
 local dap = require("dap")
 vim.keymap.set("n", "<F8>", function()
@@ -25,7 +27,7 @@ vim.keymap.set({ "n", "i" }, "<M-S-right>", "$")
 vim.keymap.set("n", ";", ":")
 
 -- fast comment
-vim.keymap.set("n", "<leader>/", "<cmd>gcc<CR>")
+vim.keymap.set("n", "<M-/>", "gcc")
 
 -- fast show dashboard
 vim.keymap.set({ "n", "i" }, "<leader>;", "<cmd>Dashboard<CR>")
@@ -44,3 +46,14 @@ vim.keymap.set({ "n", "i" }, "<leader><right>", "<C-w>l")
 
 -- zen mode
 vim.keymap.set({ "n", "i" }, "<C-z>", "<Cmd>:ZenMode<CR>")
+
+-- ai
+wk.register({
+  a = {
+    name = "ai",
+    o = { "<cmd>:NeoAI<CR>", "Toggle Open" },
+    c = { "<cmd>:NeoAIContext<CR>", "Toggle Open Context" },
+    i = { "<cmd>:NeoAIInject<CR>", "Toggle Inject" },
+    g = { "<cmd>:NeoAIInjectContext<CR>", "Toggle Inject Context" },
+  },
+}, { prefix = "<leader>" })
