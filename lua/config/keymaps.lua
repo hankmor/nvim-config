@@ -19,11 +19,11 @@ vim.keymap.set("n", "<F10>", function()
   dap.continue()
 end)
 
-vim.keymap.set({ "n", "i" }, "<leader>qc", "<Cmd>:q<CR>")
+vim.keymap.set({ "n" }, "<leader>qc", "<Cmd>:q<CR>")
 
 -- go to head/tail of a line
-vim.keymap.set({ "n", "i" }, "<M-S-left>", "^")
-vim.keymap.set({ "n", "i" }, "<M-S-right>", "$")
+vim.keymap.set({ "n" }, "<M-S-left>", "^")
+vim.keymap.set({ "n" }, "<M-S-right>", "$")
 
 -- fast entter command
 vim.keymap.set("n", ";", ":")
@@ -32,22 +32,22 @@ vim.keymap.set("n", ";", ":")
 vim.keymap.set("n", "<M-/>", "gcc")
 
 -- fast show dashboard
-vim.keymap.set({ "n", "i" }, "<leader>;", "<cmd>Dashboard<CR>")
+vim.keymap.set({ "n" }, "<leader>;", "<cmd>Dashboard<CR>")
 
 -- Resize window fastly
-vim.keymap.set({ "n", "i" }, "<M-up>", ":res -5<cr>")
-vim.keymap.set({ "n", "i" }, "<M-down>", ":res +5<cr>")
-vim.keymap.set({ "n", "i" }, "<M-left>", ":vertical resize+10<cr>")
-vim.keymap.set({ "n", "i" }, "<M-right>", ":vertical resize-10<cr>")
+vim.keymap.set({ "n" }, "<M-up>", ":res -5<cr>")
+vim.keymap.set({ "n" }, "<M-down>", ":res +5<cr>")
+vim.keymap.set({ "n" }, "<M-left>", ":vertical resize+10<cr>")
+vim.keymap.set({ "n" }, "<M-right>", ":vertical resize-10<cr>")
 
 -- Go to window fastly
-vim.keymap.set({ "n", "i" }, "<leader><up>", "<C-w>k")
-vim.keymap.set({ "n", "i" }, "<leader><down>", "<C-w>j")
-vim.keymap.set({ "n", "i" }, "<leader><left>", "<C-w>h")
-vim.keymap.set({ "n", "i" }, "<leader><right>", "<C-w>l")
+vim.keymap.set({ "n" }, "<leader><up>", "<C-w>k")
+vim.keymap.set({ "n" }, "<leader><down>", "<C-w>j")
+vim.keymap.set({ "n" }, "<leader><left>", "<C-w>h")
+vim.keymap.set({ "n" }, "<leader><right>", "<C-w>l")
 
 -- zen mode
-vim.keymap.set({ "n", "i" }, "<C-z>", "<Cmd>:ZenMode<CR>")
+vim.keymap.set({ "n" }, "<C-z>", "<Cmd>:ZenMode<CR>")
 
 -- ai
 wk.register({
