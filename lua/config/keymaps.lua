@@ -19,6 +19,8 @@ vim.keymap.set("n", "<F10>", function()
   dap.continue()
 end)
 
+vim.keymap.set({ "n", "i" }, "<leader>qc", "<Cmd>:q<CR>")
+
 -- go to head/tail of a line
 vim.keymap.set({ "n", "i" }, "<M-S-left>", "^")
 vim.keymap.set({ "n", "i" }, "<M-S-right>", "$")
@@ -35,8 +37,8 @@ vim.keymap.set({ "n", "i" }, "<leader>;", "<cmd>Dashboard<CR>")
 -- Resize window fastly
 vim.keymap.set({ "n", "i" }, "<M-up>", ":res -5<cr>")
 vim.keymap.set({ "n", "i" }, "<M-down>", ":res +5<cr>")
-vim.keymap.set({ "n", "i" }, "<M-left>", ":vertical resize+5<cr>")
-vim.keymap.set({ "n", "i" }, "<M-right>", ":vertical resize-5<cr>")
+vim.keymap.set({ "n", "i" }, "<M-left>", ":vertical resize+10<cr>")
+vim.keymap.set({ "n", "i" }, "<M-right>", ":vertical resize-10<cr>")
 
 -- Go to window fastly
 vim.keymap.set({ "n", "i" }, "<leader><up>", "<C-w>k")
