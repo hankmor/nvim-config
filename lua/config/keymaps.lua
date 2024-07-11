@@ -41,6 +41,11 @@ vim.keymap.set({ "n" }, "<M-up>", ":res -5<cr>")
 vim.keymap.set({ "n" }, "<M-down>", ":res +5<cr>")
 vim.keymap.set({ "n" }, "<M-left>", ":vertical resize+10<cr>")
 vim.keymap.set({ "n" }, "<M-right>", ":vertical resize-10<cr>")
+vim.keymap.set({ "n" }, "<M-J>", ":res -5<cr>")
+vim.keymap.set({ "n" }, "<M-K>", ":res +5<cr>")
+vim.keymap.set({ "n" }, "<M-H>", ":vertical resize+10<cr>")
+vim.keymap.set({ "n" }, "<M-L>", ":vertical resize-10<cr>")
+
 
 -- Go to window fastly
 vim.keymap.set({ "n" }, "<leader><up>", "<C-w>k")
