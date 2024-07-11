@@ -24,6 +24,8 @@ vim.keymap.set({ "n" }, "<leader>qc", "<Cmd>:q<CR>")
 -- go to head/tail of a line
 vim.keymap.set({ "n" }, "<M-S-left>", "^")
 vim.keymap.set({ "n" }, "<M-S-right>", "$")
+vim.keymap.set({ "n" }, "<M-h>", "^")
+vim.keymap.set({ "n" }, "<M-l>", "$")
 
 -- fast entter command
 vim.keymap.set("n", ";", ":")
@@ -53,9 +55,19 @@ vim.keymap.set({ "n" }, "<C-z>", "<Cmd>:ZenMode<CR>")
 wk.register({
   a = {
     name = "ai",
-    o = { "<cmd>:NeoAI<CR>", "Toggle Open" },
-    c = { "<cmd>:NeoAIContext<CR>", "Toggle Open Context" },
-    i = { "<cmd>:NeoAIInject<CR>", "Toggle Inject" },
-    g = { "<cmd>:NeoAIInjectContext<CR>", "Toggle Inject Context" },
+    o = { "<cmd>:NeoAI<CR>", "Toggle open" },
+    c = { "<cmd>:NeoAIContext<CR>", "Toggle open context" },
+    i = { "<cmd>:NeoAIInject<CR>", "Toggle inject" },
+    g = { "<cmd>:NeoAIInjectContext<CR>", "Toggle inject context" },
+  },
+}, { prefix = "<leader>" })
+
+-- rest http
+wk.register({
+  h = {
+    name = "http",
+    e = { "<cmd>lua require('telescope').extensions.rest.select_env()<CR>", "Select env file" },
+    r = { "<cmd>Rest run<cr>", "Run request under the cursor" },
+    l = { "<cmd>Rest run last<cr>", "Re-run latest request" },
   },
 }, { prefix = "<leader>" })
