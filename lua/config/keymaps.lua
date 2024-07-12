@@ -22,16 +22,16 @@ end)
 vim.keymap.set({ "n" }, "<leader>qc", "<Cmd>:q<CR>")
 
 -- go to head/tail of a line
-vim.keymap.set({ "n" }, "<M-S-left>", "^")
-vim.keymap.set({ "n" }, "<M-S-right>", "$")
-vim.keymap.set({ "n" }, "<M-h>", "^")
-vim.keymap.set({ "n" }, "<M-l>", "$")
+vim.keymap.set({ "n", "v" }, "<M-S-left>", "^")
+vim.keymap.set({ "n", "v" }, "<M-S-right>", "$")
+vim.keymap.set({ "n", "v" }, "<M-h>", "^")
+vim.keymap.set({ "n", "v" }, "<M-l>", "$")
 
 -- fast entter command
 vim.keymap.set("n", ";", ":")
 
 -- fast comment
-vim.keymap.set("n", "<M-/>", "gcc")
+vim.keymap.set("n", "<M-/>", ":gcc<CR>")
 
 -- fast show dashboard
 vim.keymap.set({ "n" }, "<leader>;", "<cmd>Dashboard<CR>")
