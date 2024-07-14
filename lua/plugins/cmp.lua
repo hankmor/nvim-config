@@ -27,7 +27,7 @@ return {
             fallback()
           end
         end, { "i", "s" }),
-        ["<A-Tab>"] = cmp.mapping(function(fallback)
+        ["<M-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif vim.snippet.active({ direction = -1 }) then
