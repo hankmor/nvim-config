@@ -12,7 +12,7 @@ return {
       local cmp = require("cmp")
 
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
-        ["j"] = cmp.mapping(function(fallback)
+        ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
             cmp.select_next_item()
@@ -20,13 +20,14 @@ return {
             vim.schedule(function()
               vim.snippet.jump(1)
             end)
-          elseif has_words_before() then
-            cmp.complete()
+            -- comment it because of duplicating to jump to next param placeholder
+            -- elseif has_words_before() then
+            --   cmp.complete()
           else
             fallback()
           end
         end, { "i", "s" }),
-        ["k"] = cmp.mapping(function(fallback)
+        ["<A-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif vim.snippet.active({ direction = -1 }) then
