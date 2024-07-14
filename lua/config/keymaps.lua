@@ -31,7 +31,7 @@ vim.keymap.set({ "n", "v" }, "<M-l>", "$")
 vim.keymap.set("n", ";", ":")
 
 -- fast comment
-vim.keymap.set("n", "<M-/>", ":gcc<CR>")
+-- vim.keymap.set({ "n", "v" }, "<M-/>", "gcc", { remap = true })
 
 -- fast show dashboard
 vim.keymap.set({ "n" }, "<leader>;", "<cmd>Dashboard<CR>")
@@ -56,22 +56,37 @@ vim.keymap.set({ "n" }, "<leader><right>", "<C-w>l")
 vim.keymap.set({ "n" }, "<C-z>", "<Cmd>:ZenMode<CR>")
 
 -- ai
-wk.register({
-  a = {
-    name = "ai",
-    o = { "<cmd>:NeoAI<CR>", "Toggle open" },
-    c = { "<cmd>:NeoAIContext<CR>", "Toggle open context" },
-    i = { "<cmd>:NeoAIInject<CR>", "Toggle inject" },
-    g = { "<cmd>:NeoAIInjectContext<CR>", "Toggle inject context" },
+wk.add({
+  {
+    { "<leader>a", group = "ai" },
+    { "<leader>ao", "<cmd>:NeoAI<CR>", desc = "Toggle open" },
+    { "<leader>ac", "<cmd>:NeoAIContext<CR>", desc = "Toggle open context" },
+    { "<leader>ai", "<cmd>:NeoAIInject<CR>", desc = "Toggle inject" },
+    { "<leader>ag", "<cmd>:NeoAIInjectContext<CR>", desc = "Toggle inject context" },
   },
-}, { prefix = "<leader>" })
+})
 
 -- rest http
-wk.register({
-  h = {
-    name = "http",
-    e = { "<cmd>lua require('telescope').extensions.rest.select_env()<CR>", "Select env file" },
-    r = { "<cmd>Rest run<cr>", "Run request under the cursor" },
-    l = { "<cmd>Rest run last<cr>", "Re-run latest request" },
-  },
-}, { prefix = "<leader>" })
+wk.add({
+  { "<leader>h", group = "http", icon = "󰌷" },
+  { "<leader>he", "<cmd>lua require('telescope').extensions.rest.select_env()<CR>", desc = "Select env file" },
+  { "<leader>hr", "<cmd>Rest run<cr>", desc = "Run request under the cursor" },
+  { "<leader>hl", "<cmd>Rest run last<cr>", desc = "Re-run latest request" },
+})
+
+wk.add({
+  { "<leader>G", group = "go", icon = "" },
+  { "<leader>Gd", "<cmd>lua require('dap-go').debug_test()<cr>", desc = "Debug Test" },
+  { "<leader>Gi", "<cmd>GoInstallDeps<Cr>", desc = "Install Go Dependencies" },
+  { "<leader>Gt", "<cmd>GoMod tidy<cr>", desc = "Tidy" },
+  { "<leader>Ga", "<cmd>GoTestAdd<Cr>", desc = "Add Test" },
+  { "<leader>GA", "<cmd>GoTestsAll<Cr>", desc = "Add All Tests" },
+  { "<leader>Ge", "<cmd>GoTestsExp<Cr>", desc = "Add Exported Tests" },
+  { "<leader>Gg", "<cmd>GoGenerate<Cr>", desc = "Go Generate" },
+  { "<leader>GG", "<cmd>GoGenerate %<Cr>", desc = "Go Generate File" },
+  { "<leader>Gc", "<cmd>GoCmt<Cr>", desc = "Generate Comment" },
+  { "<leader>GI", "<cmd>GoImpl<Cr>", desc = "Implements Interface" },
+})
+
+-- select window
+wk.add({ { "<leader>ws", "<Cmd>lua require('nvim-window').pick()<CR>", desc = "select window" } })
