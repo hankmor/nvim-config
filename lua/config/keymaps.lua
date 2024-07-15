@@ -90,3 +90,18 @@ wk.add({
 
 -- select window
 wk.add({ { "<leader>ws", "<Cmd>lua require('nvim-window').pick()<CR>", desc = "select window" } })
+
+-- select buffer
+wk.add({
+  {
+    { "<leader>bs", "<Cmd>:BufferLinePick<CR>", desc = "Pick Buffer" },
+  },
+})
+
+-- scissor manage snippts
+wk.add({
+  { "<leader>p", group = "snippts" },
+  { "<leader>pa", ":ScissorsAddNewSnippet<cr>", desc = "Add New Snippt" },
+  { "<leader>pA", ":'<,'>ScissorsAddNewSnippet<cr>", desc = "Add New Snippt in Visual Mode" },
+  { "<leader>pe", ":ScissorsEditSnippet<cr>", desc = "Edit Snippt" },
+})
