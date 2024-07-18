@@ -1,7 +1,7 @@
 return {
   {
     "folke/zen-mode.nvim",
-    event = "BufRead",
+    event = "VeryLazy",
     dependencies = { "lvimuser/lsp-inlayhints.nvim" },
     config = function()
       local lsp_inlayhints = require("lsp-inlayhints")

@@ -105,3 +105,9 @@ wk.add({
   { "<leader>pA", ":'<,'>ScissorsAddNewSnippet<cr>", desc = "Add New Snippt in Visual Mode" },
   { "<leader>pe", ":ScissorsEditSnippet<cr>", desc = "Edit Snippt" },
 })
+
+-- tranlate quickly
+vim.keymap.set("n", "le", ":Translate EN<CR>")
+vim.keymap.set("n", "lz", ":Translate ZH<CR>")
+vim.keymap.set("n", "lz", ":'<,'>Translate ZH<CR>")
+vim.keymap.set("n", "lw", "viw:Translate ZH<CR>")

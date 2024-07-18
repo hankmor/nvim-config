@@ -2,7 +2,7 @@ return {
   {
     -- snippets管理插件
     "chrisgrieser/nvim-scissors",
-    event = "BufRead",
+    event = "VeryLazy",
     dependencies = "nvim-telescope/telescope.nvim", -- optional
     config = function()
       local snippetsDir = "~/.config/nvim/snippets/"

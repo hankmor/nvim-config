@@ -2,6 +2,7 @@ return {
   -- select window
   {
     "yorickpeterse/nvim-window",
+    event = "VeryLazy",
     config = function()
       require("nvim-window").setup({
         -- The characters available for hinting windows.

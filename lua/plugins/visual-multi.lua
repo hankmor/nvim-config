@@ -1,6 +1,6 @@
 return {
   "mg979/vim-visual-multi",
-  event = "BufRead",
+  event = "VeryLazy",
   branch = "master",
   -- makesure it works
   keys = { { "<C-Up>" }, { "<C-Down>" } },
