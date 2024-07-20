@@ -9,6 +9,9 @@ return {
         sidebars = "transparent",
         floats = "transparent",
       },
+      on_colors = function(colors)
+        colors.comment = colors.blue1
+      end,
     },
   },
 }
