@@ -10,7 +10,7 @@ return {
         floats = "transparent",
       },
       on_colors = function(colors)
-        colors.comment = colors.blue1
+        colors.comment = colors.fg_dark
       end,
     },
   },
