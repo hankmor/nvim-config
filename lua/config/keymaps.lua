@@ -24,8 +24,8 @@ vim.keymap.set({ "n" }, "<leader>qc", "<Cmd>:q<CR>")
 -- go to head/tail of a line
 vim.keymap.set({ "n", "v" }, "<M-S-left>", "^")
 vim.keymap.set({ "n", "v" }, "<M-S-right>", "$")
-vim.keymap.set({ "n", "v" }, "<M-h>", "^")
-vim.keymap.set({ "n", "v" }, "<M-l>", "$")
+vim.keymap.set({ "n", "v" }, "gh", "^", { remap = true })
+vim.keymap.set({ "n", "v" }, "gl", "$", { remap = true })
 
 -- fast entter command
 vim.keymap.set("n", ";", ":")
@@ -109,5 +109,5 @@ wk.add({
 -- tranlate quickly
 vim.keymap.set("n", "le", ":Translate EN<CR>")
 vim.keymap.set("n", "lz", ":Translate ZH<CR>")
-vim.keymap.set("n", "lz", ":'<,'>Translate ZH<CR>")
+-- vim.keymap.set("n", "lz", ":'<,'>Translate ZH<CR>")
 vim.keymap.set("n", "lw", "viw:Translate ZH<CR>")
