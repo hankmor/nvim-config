@@ -1,1 +1,1 @@
-{"gorm":{"prefix":"gorm","body":"`gorm:\"$1;default:$2;comment:'$3'\"`"},"funct":{"body":["func Test$1(t *testing.T) {","\t$2","}"],"prefix":"funct"},"mapst":{"body":"`mapstructure:\"$1\" yaml:\"$2\"`","prefix":"mapst"}}
+{"mapst":{"body":"`mapstructure:\"$1\" yaml:\"$2\"`","prefix":"mapst"},"funct":{"body":["func Test$1(t *testing.T) {","\t$2","}"],"prefix":"funct"},"gorm":{"prefix":"gorm","body":"`gorm:\"$1;default:$2;comment:'$3'\"`"},"dberr":{"body":["if $1.Error != nil {","\t$2.Errorf(\"db error: %v\", $1.Error)","}"],"prefix":"dberr"}}
