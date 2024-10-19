@@ -2,6 +2,7 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+local M = {}
 local wk = require("which-key")
 
 -- dap keymapping to Jetbrains
@@ -111,3 +112,181 @@ vim.keymap.set("n", "le", ":Translate EN<CR>")
 vim.keymap.set("n", "lz", ":Translate ZH<CR>")
 -- vim.keymap.set("n", "lz", ":'<,'>Translate ZH<CR>")
 vim.keymap.set("n", "lw", "viw:Translate ZH<CR>")
+
+function M.setup_markdown_keymaps()
+  return {
+    {
+      "<Leader>uM",
+      function()
+        local m = require("render-markdown")
+        local enabled = require("render-markdown.state").enabled
+        if enabled then
+          m.disable()
+          vim.cmd("setlocal conceallevel=0")
+        else
+          m.enable()
+          vim.cmd("setlocal conceallevel=2")
+        end
+      end,
+      desc = "Toggle markdown render",
+    },
+  }
+end
+
+function M.setup_typescript_lsp_keymaps()
+  return {
+    {
+      "gD",
+      function()
+        require("vtsls").commands.goto_source_definition(0)
+      end,
+      desc = "Goto Source Definition",
+    },
+    {
+      "gR",
+      function()
+        require("vtsls").commands.file_references(0)
+      end,
+      desc = "File References",
+    },
+    {
+      "<leader>co",
+      function()
+        require("vtsls").commands.organize_imports(0)
+      end,
+      desc = "Organize Imports",
+    },
+    {
+      "<leader>cM",
+      function()
+        require("vtsls").commands.add_missing_imports(0)
+      end,
+      desc = "Add missing imports",
+    },
+    {
+      "<leader>cu",
+      function()
+        require("vtsls").commands.remove_unused_imports(0)
+      end,
+      desc = "Remove unused imports",
+    },
+    {
+      "<leader>cD",
+      function()
+        require("vtsls").commands.fix_all(0)
+      end,
+      desc = "Fix all diagnostics",
+    },
+    {
+      "<leader>cV",
+      function()
+        require("vtsls").commands.select_ts_version(0)
+      end,
+      desc = "Select TS workspace version",
+    },
+  }
+end
+
+function M.setup_diffview_keymaps()
+  return {
+    -- use [c and [c to navigate diffs (vim built in), see :h jumpto-diffs
+    -- use ]x and [x to navigate conflicts
+    { "<leader>gdc", ":DiffviewOpen origin/main...HEAD", desc = "Compare commits" },
+    { "<leader>gdq", ":DiffviewClose<CR>", desc = "Close Diffview tab" },
+    { "<leader>gdh", ":DiffviewFileHistory %<CR>", desc = "File history" },
+    { "<leader>gdH", ":DiffviewFileHistory<CR>", desc = "Repo history" },
+    { "<leader>gdm", ":DiffviewOpen<CR>", desc = "Solve merge conflicts" },
+    { "<leader>gdo", ":DiffviewOpen main", desc = "DiffviewOpen" },
+    { "<leader>gdt", ":DiffviewOpen<CR>", desc = "DiffviewOpen this" },
+    { "<leader>gdp", ":DiffviewOpen origin/main...HEAD --imply-local", desc = "Review current PR" },
+    {
+      "<leader>gdP",
+      ":DiffviewFileHistory --range=origin/main...HEAD --right-only --no-merges --reverse",
+      desc = "Review current PR (per commit)",
+    },
+  }
+end
+
+function M.setup_terminal_keymaps()
+  -- Both <C-/> and <C-_> are mapped due to the way control characters are interpreted by terminal emulators.
+  -- ASCII value of '/' is 47, and of '_' is 95. When <C-/> is pressed, the terminal sends (47 - 64) which wraps around to 111 ('o').
+  -- When <C-_> is pressed, the terminal sends (95 - 64) which is 31. Hence, both key combinations need to be mapped.
+
+  -- <C-/> toggles the floating terminal
+  local ctrl_slash = "<C-/>"
+  local alt_underscore = "<A-_>"
+  local ctrl_alt_slash = "<C-A-/>"
+  local ctrl_alt_underscore = "<C-A-_>"
+  local floating_term_cmd = function()
+    vim.api.nvim_set_keymap("t", "<Esc><Esc>", "<C-\\><C-n>", { noremap = true })
+    require("utils.terminal").toggle_fterm()
+  end
+  local split_term_cmd = function()
+    vim.api.nvim_set_keymap("t", "<Esc><Esc>", "<C-\\><C-n>", { noremap = true })
+    require("utils.terminal").toggle_terminal_native()
+  end
+  vim.keymap.set({ "n", "i", "t", "v" }, ctrl_alt_slash, split_term_cmd, { desc = "Toggle terminal" })
+  vim.keymap.set({ "n", "i", "t", "v" }, ctrl_alt_underscore, split_term_cmd, { desc = "Toggle terminal" })
+
+  -- C-A-/ toggles split terminal on/off
+  vim.keymap.set({ "n", "i", "t", "v" }, ctrl_slash, floating_term_cmd, { desc = "Toggle native terminal" })
+  vim.keymap.set({ "n", "i", "t", "v" }, alt_underscore, floating_term_cmd, { desc = "Toggle native terminal" })
+end
+
+function M.setup_minimap_keymaps()
+  return {
+    { "<Leader>um", "<cmd>Neominimap toggle<CR>", desc = "Toggle Mini map" },
+    -- { "<leader>nt", "<cmd>Neominimap toggle<cr>", desc = "Toggle minimap" },
+    -- { "<leader>no", "<cmd>Neominimap on<cr>", desc = "Enable minimap" },
+    -- { "<leader>nc", "<cmd>Neominimap off<cr>", desc = "Disable minimap" },
+    -- { "<leader>nf", "<cmd>Neominimap focus<cr>", desc = "Focus on minimap" },
+    -- { "<leader>nu", "<cmd>Neominimap unfocus<cr>", desc = "Unfocus minimap" },
+    -- { "<leader>ns", "<cmd>Neominimap toggleFocus<cr>", desc = "Toggle focus on minimap" },
+    -- { "<leader>nwt", "<cmd>Neominimap winToggle<cr>", desc = "Toggle minimap for current window" },
+    -- { "<leader>nwr", "<cmd>Neominimap winRefresh<cr>", desc = "Refresh minimap for current window" },
+    -- { "<leader>nwo", "<cmd>Neominimap winOn<cr>", desc = "Enable minimap for current window" },
+    -- { "<leader>nwc", "<cmd>Neominimap winOff<cr>", desc = "Disable minimap for current window" },
+    -- { "<leader>nbt", "<cmd>Neominimap bufToggle<cr>", desc = "Toggle minimap for current buffer" },
+    -- { "<leader>nbr", "<cmd>Neominimap bufRefresh<cr>", desc = "Refresh minimap for current buffer" },
+    -- { "<leader>nbo", "<cmd>Neominimap bufOn<cr>", desc = "Enable minimap for current buffer" },
+    -- { "<leader>nbc", "<cmd>Neominimap bufOff<cr>", desc = "Disable minimap for current buffer" },
+  }
+end
+
+function M.setup_obsidian_keymaps(obsidian_vars)
+  return {
+    { "<leader>ns", "<cmd>ObsidianSearch<cr>", desc = "[N]otes: [s]earch text" },
+    { "<leader>nf", "<cmd>ObsidianQuickSwitch<cr>", desc = "[N]otes: search [f]ilenames" },
+    { "<leader>nn", "<cmd>ObsidianNew<cr>", desc = "[N]otes: [n]new" },
+    { "<leader>nl", "<cmd>ObsidianQuickSwitch Learning.md<cr><cr>", desc = "[N]otes: [l]earning" },
+    { "<leader>ng", "<cmd>ObsidianQuickSwitch Go.md<cr><cr>", desc = "[N]otes: [g]olang learning" },
+    { "<leader>nv", "<cmd>ObsidianQuickSwitch Neovim config.md<cr><cr>", desc = "[N]otes: Neo[v]im todo" },
+
+    {
+      "<leader>nS",
+      function()
+        local client = require("obsidian").get_client()
+        client:open_note(obsidian_vars.scratchpad_path)
+      end,
+      desc = "[N]otes: [S]cratchpad",
+    },
+    {
+      "<leader>nm",
+      function()
+        local client = require("obsidian").get_client()
+        -- client.dir is the vault path
+        local note = client:create_note({
+          title = "Meeting notes",
+          dir = vim.fn.expand(obsidian_vars.notes_path),
+          -- NOTE: if folder "templates" exist in $cwd,
+          -- the template is expected to be found there.
+          template = "meeting_notes",
+        })
+        client:open_note(note)
+      end,
+      desc = "[N]otes: new [m]eeting agenda from template",
+    },
+  }
+end
+
+return M
