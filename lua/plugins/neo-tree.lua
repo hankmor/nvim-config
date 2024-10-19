@@ -1,4 +1,4 @@
-local remove_lsp_cwd = require("util").remove_lsp_cwd
+local remove_lsp_cwd = require("utils/util").remove_lsp_cwd
 
 local function is_file(path)
   if path:sub(-1) == "/" then
