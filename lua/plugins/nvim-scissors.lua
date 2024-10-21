@@ -10,6 +10,7 @@ return {
       require("scissors").setup({
         snippetDir = snippetsDir,
       })
+      require("config.keymaps").setup_scissor_keymaps()
     end,
   },
 }

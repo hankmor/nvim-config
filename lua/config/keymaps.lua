@@ -5,113 +5,136 @@
 local M = {}
 local wk = require("which-key")
 
--- dap keymapping to Jetbrains
-local dap = require("dap")
-vim.keymap.set("n", "<F8>", function()
-  dap.step_over()
-end)
-vim.keymap.set("n", "<F7>", function()
-  dap.step_into()
-end)
-vim.keymap.set("n", "<F9>", function()
-  dap.step_out()
-end)
-vim.keymap.set("n", "<F10>", function()
-  dap.continue()
-end)
+function M.setup_keymaps()
+  M.setup_common_keymaps()
+  M.setup_window_keymaps()
+  M.setup_buffer_keymaps()
+  M.setup_dap_keymaps()
+end
 
-vim.keymap.set({ "n" }, "<leader>qc", "<Cmd>:q<CR>")
+function M.setup_dap_keymaps()
+  -- dap keymapping to Jetbrains
+  local dap = require("dap")
+  vim.keymap.set("n", "<F8>", function()
+    dap.step_over()
+  end)
+  vim.keymap.set("n", "<F7>", function()
+    dap.step_into()
+  end)
+  vim.keymap.set("n", "<F9>", function()
+    dap.step_out()
+  end)
+  vim.keymap.set("n", "<F10>", function()
+    dap.continue()
+  end)
+end
 
--- go to head/tail of a line
-vim.keymap.set({ "n", "v" }, "<M-S-left>", "^")
-vim.keymap.set({ "n", "v" }, "<M-S-right>", "$")
-vim.keymap.set({ "n", "v" }, "gh", "^", { remap = true })
-vim.keymap.set({ "n", "v" }, "gl", "$", { remap = true })
+function M.setup_common_keymaps()
+  -- simplify quit keymap
+  vim.keymap.set({ "n" }, "<leader>qc", "<Cmd>:q<CR>")
+  -- go to head/tail of a line
+  vim.keymap.set({ "n", "v" }, "<M-S-left>", "^")
+  vim.keymap.set({ "n", "v" }, "<M-S-right>", "$")
+  vim.keymap.set({ "n", "v" }, "gh", "^", { remap = true })
+  vim.keymap.set({ "n", "v" }, "gl", "$", { remap = true })
+  -- fast comment
+  vim.keymap.set({ "n", "v" }, "<M-/>", "<cmd>gcc<CR>", { remap = true })
+end
 
--- fast entter command
-vim.keymap.set("n", ";", ":")
+function M.setup_dashboard_keymaps()
+  -- fast show dashboard
+  vim.keymap.set({ "n" }, "<leader>;", "<cmd>Dashboard<CR>")
+end
 
--- fast comment
--- vim.keymap.set({ "n", "v" }, "<M-/>", "gcc", { remap = true })
+function M.setup_zen_keymaps()
+  -- zen mode
+  vim.keymap.set({ "n" }, "<C-z>", "<Cmd>:ZenMode<CR>")
+end
 
--- fast show dashboard
-vim.keymap.set({ "n" }, "<leader>;", "<cmd>Dashboard<CR>")
+function M.setup_ai_keymaps()
+  -- ai
+  wk.add({
+    {
+      { "<leader>a", group = "ai" },
+      { "<leader>ao", "<cmd>:NeoAI<CR>", desc = "Toggle open" },
+      { "<leader>ac", "<cmd>:NeoAIContext<CR>", desc = "Toggle open context" },
+      { "<leader>ai", "<cmd>:NeoAIInject<CR>", desc = "Toggle inject" },
+      { "<leader>ag", "<cmd>:NeoAIInjectContext<CR>", desc = "Toggle inject context" },
+    },
+  })
+end
 
--- Resize window fastly
-vim.keymap.set({ "n" }, "<M-up>", ":res -5<cr>")
-vim.keymap.set({ "n" }, "<M-down>", ":res +5<cr>")
-vim.keymap.set({ "n" }, "<M-left>", ":vertical resize+10<cr>")
-vim.keymap.set({ "n" }, "<M-right>", ":vertical resize-10<cr>")
-vim.keymap.set({ "n" }, "<M-J>", ":res -5<cr>")
-vim.keymap.set({ "n" }, "<M-K>", ":res +5<cr>")
-vim.keymap.set({ "n" }, "<M-H>", ":vertical resize+10<cr>")
-vim.keymap.set({ "n" }, "<M-L>", ":vertical resize-10<cr>")
+function M.setup_rest_keymaps()
+  -- rest http
+  wk.add({
+    { "<leader>h", group = "http", icon = "󰌷" },
+    { "<leader>he", "<cmd>lua require('telescope').extensions.rest.select_env()<CR>", desc = "Select env file" },
+    { "<leader>hr", "<cmd>Rest run<cr>", desc = "Run request under the cursor" },
+    { "<leader>hl", "<cmd>Rest run last<cr>", desc = "Re-run latest request" },
+  })
+end
 
--- Go to window fastly
-vim.keymap.set({ "n" }, "<leader><up>", "<C-w>k")
-vim.keymap.set({ "n" }, "<leader><down>", "<C-w>j")
-vim.keymap.set({ "n" }, "<leader><left>", "<C-w>h")
-vim.keymap.set({ "n" }, "<leader><right>", "<C-w>l")
+function M.setup_go_keymaps()
+  wk.add({
+    { "<leader>G", group = "go", icon = "" },
+    { "<leader>Gd", "<cmd>lua require('dap-go').debug_test()<cr>", desc = "Debug Test" },
+    { "<leader>Gi", "<cmd>GoInstallDeps<Cr>", desc = "Install Go Dependencies" },
+    { "<leader>Gt", "<cmd>GoMod tidy<cr>", desc = "Tidy" },
+    { "<leader>Ga", "<cmd>GoTestAdd<Cr>", desc = "Add Test" },
+    { "<leader>GA", "<cmd>GoTestsAll<Cr>", desc = "Add All Tests" },
+    { "<leader>Ge", "<cmd>GoTestsExp<Cr>", desc = "Add Exported Tests" },
+    { "<leader>Gg", "<cmd>GoGenerate<Cr>", desc = "Go Generate" },
+    { "<leader>GG", "<cmd>GoGenerate %<Cr>", desc = "Go Generate File" },
+    { "<leader>Gc", "<cmd>GoCmt<Cr>", desc = "Generate Comment" },
+    { "<leader>GI", "<cmd>GoImpl<Cr>", desc = "Implements Interface" },
+  })
+end
 
--- zen mode
-vim.keymap.set({ "n" }, "<C-z>", "<Cmd>:ZenMode<CR>")
+function M.setup_window_keymaps()
+  -- select window
+  wk.add({ { "<leader>ws", "<Cmd>lua require('nvim-window').pick()<CR>", desc = "select window" } })
+  -- Resize window fastly
+  vim.keymap.set({ "n" }, "<M-up>", ":res -5<cr>")
+  vim.keymap.set({ "n" }, "<M-down>", ":res +5<cr>")
+  vim.keymap.set({ "n" }, "<M-left>", ":vertical resize+10<cr>")
+  vim.keymap.set({ "n" }, "<M-right>", ":vertical resize-10<cr>")
+  vim.keymap.set({ "n" }, "<M-J>", ":res -5<cr>")
+  vim.keymap.set({ "n" }, "<M-K>", ":res +5<cr>")
+  vim.keymap.set({ "n" }, "<M-H>", ":vertical resize+10<cr>")
+  vim.keymap.set({ "n" }, "<M-L>", ":vertical resize-10<cr>")
+  -- Go to window fastly
+  vim.keymap.set({ "n" }, "<leader><up>", "<C-w>k")
+  vim.keymap.set({ "n" }, "<leader><down>", "<C-w>j")
+  vim.keymap.set({ "n" }, "<leader><left>", "<C-w>h")
+  vim.keymap.set({ "n" }, "<leader><right>", "<C-w>l")
+end
 
--- ai
-wk.add({
-  {
-    { "<leader>a", group = "ai" },
-    { "<leader>ao", "<cmd>:NeoAI<CR>", desc = "Toggle open" },
-    { "<leader>ac", "<cmd>:NeoAIContext<CR>", desc = "Toggle open context" },
-    { "<leader>ai", "<cmd>:NeoAIInject<CR>", desc = "Toggle inject" },
-    { "<leader>ag", "<cmd>:NeoAIInjectContext<CR>", desc = "Toggle inject context" },
-  },
-})
+function M.setup_buffer_keymaps()
+  -- select buffer
+  wk.add({
+    {
+      { "<leader>bs", "<Cmd>:BufferLinePick<CR>", desc = "Pick Buffer" },
+    },
+  })
+end
 
--- rest http
-wk.add({
-  { "<leader>h", group = "http", icon = "󰌷" },
-  { "<leader>he", "<cmd>lua require('telescope').extensions.rest.select_env()<CR>", desc = "Select env file" },
-  { "<leader>hr", "<cmd>Rest run<cr>", desc = "Run request under the cursor" },
-  { "<leader>hl", "<cmd>Rest run last<cr>", desc = "Re-run latest request" },
-})
+function M.setup_scissor_keymaps()
+  -- scissor manage snippts
+  wk.add({
+    { "<leader>p", group = "snippts" },
+    { "<leader>pa", ":ScissorsAddNewSnippet<cr>", desc = "Add New Snippt" },
+    { "<leader>pA", ":'<,'>ScissorsAddNewSnippet<cr>", desc = "Add New Snippt in Visual Mode" },
+    { "<leader>pe", ":ScissorsEditSnippet<cr>", desc = "Edit Snippt" },
+  })
+end
 
-wk.add({
-  { "<leader>G", group = "go", icon = "" },
-  { "<leader>Gd", "<cmd>lua require('dap-go').debug_test()<cr>", desc = "Debug Test" },
-  { "<leader>Gi", "<cmd>GoInstallDeps<Cr>", desc = "Install Go Dependencies" },
-  { "<leader>Gt", "<cmd>GoMod tidy<cr>", desc = "Tidy" },
-  { "<leader>Ga", "<cmd>GoTestAdd<Cr>", desc = "Add Test" },
-  { "<leader>GA", "<cmd>GoTestsAll<Cr>", desc = "Add All Tests" },
-  { "<leader>Ge", "<cmd>GoTestsExp<Cr>", desc = "Add Exported Tests" },
-  { "<leader>Gg", "<cmd>GoGenerate<Cr>", desc = "Go Generate" },
-  { "<leader>GG", "<cmd>GoGenerate %<Cr>", desc = "Go Generate File" },
-  { "<leader>Gc", "<cmd>GoCmt<Cr>", desc = "Generate Comment" },
-  { "<leader>GI", "<cmd>GoImpl<Cr>", desc = "Implements Interface" },
-})
-
--- select window
-wk.add({ { "<leader>ws", "<Cmd>lua require('nvim-window').pick()<CR>", desc = "select window" } })
-
--- select buffer
-wk.add({
-  {
-    { "<leader>bs", "<Cmd>:BufferLinePick<CR>", desc = "Pick Buffer" },
-  },
-})
-
--- scissor manage snippts
-wk.add({
-  { "<leader>p", group = "snippts" },
-  { "<leader>pa", ":ScissorsAddNewSnippet<cr>", desc = "Add New Snippt" },
-  { "<leader>pA", ":'<,'>ScissorsAddNewSnippet<cr>", desc = "Add New Snippt in Visual Mode" },
-  { "<leader>pe", ":ScissorsEditSnippet<cr>", desc = "Edit Snippt" },
-})
-
--- tranlate quickly
-vim.keymap.set("n", "le", ":Translate EN<CR>")
-vim.keymap.set("n", "lz", ":Translate ZH<CR>")
--- vim.keymap.set("n", "lz", ":'<,'>Translate ZH<CR>")
-vim.keymap.set("n", "lw", "viw:Translate ZH<CR>")
+function M.setup_translate_keymaps()
+  -- tranlate quickly
+  vim.keymap.set("n", "le", ":Translate EN<CR>")
+  vim.keymap.set("n", "lz", ":Translate ZH<CR>")
+  -- vim.keymap.set("n", "lz", ":'<,'>Translate ZH<CR>")
+  vim.keymap.set("n", "lw", "viw:Translate ZH<CR>")
+end
 
 function M.setup_markdown_keymaps()
   return {

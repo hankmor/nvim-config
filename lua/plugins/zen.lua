@@ -33,6 +33,7 @@ return {
           },
         },
       })
+      require("config.keymaps").setup_zen_keymaps()
     end,
   },
 }
