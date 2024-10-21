@@ -56,6 +56,8 @@ return {
         },
         open_api_key_env = "OPENAI_API_KEY",
       })
+
+      require("config.keymaps").setup_ai_keymaps()
     end,
   },
 }

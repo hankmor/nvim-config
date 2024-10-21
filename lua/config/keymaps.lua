@@ -38,7 +38,7 @@ function M.setup_common_keymaps()
   vim.keymap.set({ "n", "v" }, "gh", "^", { remap = true })
   vim.keymap.set({ "n", "v" }, "gl", "$", { remap = true })
   -- fast comment
-  vim.keymap.set({ "n", "v" }, "<M-/>", "<cmd>gcc<CR>", { remap = true })
+  vim.keymap.set({ "n", "v" }, "<M-/>", "gcc<CR>", { remap = true })
 end
 
 function M.setup_dashboard_keymaps()
