@@ -1,6 +1,7 @@
 return {
   {
     "hrsh7th/nvim-cmp",
+    enabled = false,
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local has_words_before = function()
@@ -20,9 +21,9 @@ return {
             vim.schedule(function()
               vim.snippet.jump(1)
             end)
-            -- comment it because of duplicating to jump to next param placeholder
-            -- elseif has_words_before() then
-            --   cmp.complete()
+          -- comment it because of duplicating to jump to next param placeholder
+          elseif has_words_before() then
+            cmp.complete()
           else
             fallback()
           end
@@ -38,22 +39,6 @@ return {
             fallback()
           end
         end, { "i", "s" }),
-      })
-    end,
-  },
-  -- to enable command line completion
-  {
-    "hrsh7th/cmp-cmdline",
-    config = function()
-      local cmp = require("cmp")
-      cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = "path" },
-        }, {
-          { name = "cmdline" },
-        }),
-        matching = { disallow_symbol_nonprefix_matching = false },
       })
     end,
   },

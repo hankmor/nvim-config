@@ -3,6 +3,8 @@ return {
     "folke/zen-mode.nvim",
     event = "VeryLazy",
     dependencies = { "lvimuser/lsp-inlayhints.nvim" },
+    -- LazyVim v14 supported but not fine, so use this
+    enable = true,
     config = function()
       local lsp_inlayhints = require("lsp-inlayhints")
       require("zen-mode").setup({

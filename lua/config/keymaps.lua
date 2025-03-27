@@ -3,7 +3,10 @@
 -- Add any additional keymaps here
 
 local M = {}
-local wk = require("which-key")
+local status, wk = pcall(require, "which-key")
+if not status then
+  return
+end
 
 function M.setup_keymaps()
   M.setup_common_keymaps()
@@ -14,7 +17,10 @@ end
 
 function M.setup_dap_keymaps()
   -- dap keymapping to Jetbrains
-  local dap = require("dap")
+  local ok, dap = pcall(require, "dap")
+  if not ok then
+    return
+  end
   vim.keymap.set("n", "<F8>", function()
     dap.step_over()
   end)
@@ -32,6 +38,9 @@ end
 function M.setup_common_keymaps()
   -- simplify quit keymap
   vim.keymap.set({ "n" }, "<leader>qc", "<Cmd>:q<CR>")
+  -- intend or unintend fastly
+  -- vim.keymap.set("n", "<S-Tab>", "<Cmd><<CR>")
+  -- vim.keymap.set("n", "<Tab>", "<Cmd>><CR>")
   -- go to head/tail of a line
   vim.keymap.set({ "n", "v" }, "<M-S-left>", "^")
   vim.keymap.set({ "n", "v" }, "<M-S-right>", "$")
@@ -39,6 +48,18 @@ function M.setup_common_keymaps()
   vim.keymap.set({ "n", "v" }, "gl", "$", { remap = true })
   -- fast comment
   vim.keymap.set({ "n", "v" }, "<M-/>", "gcc<CR>", { remap = true })
+  wk.add({
+    "<leader>Nn",
+    "<cmd>:Neotree reveal<CR>:set relativenumber<CR>",
+    desc = "NeoTree Show Number",
+    silent = true,
+  })
+  wk.add({
+    "<leader>Nc",
+    "<cmd>:Neotree reveal<CR>:set relativenumber 0<CR>",
+    desc = "NeoTree Hie Number",
+    silent = true,
+  })
 end
 
 function M.setup_dashboard_keymaps()
@@ -51,23 +72,10 @@ function M.setup_zen_keymaps()
   vim.keymap.set({ "n" }, "<C-z>", "<Cmd>:ZenMode<CR>")
 end
 
-function M.setup_ai_keymaps()
-  -- ai
-  wk.add({
-    {
-      { "<leader>a", group = "ai" },
-      { "<leader>ao", "<cmd>:NeoAI<CR>", desc = "Toggle open" },
-      { "<leader>ac", "<cmd>:NeoAIContext<CR>", desc = "Toggle open context" },
-      { "<leader>ai", "<cmd>:NeoAIInject<CR>", desc = "Toggle inject" },
-      { "<leader>ag", "<cmd>:NeoAIInjectContext<CR>", desc = "Toggle inject context" },
-    },
-  })
-end
-
 function M.setup_rest_keymaps()
   -- rest http
   wk.add({
-    { "<leader>h", group = "http", icon = "󰌷" },
+    { "<leader>h", group = "Http", icon = "󰌷" },
     { "<leader>he", "<cmd>lua require('telescope').extensions.rest.select_env()<CR>", desc = "Select env file" },
     { "<leader>hr", "<cmd>Rest run<cr>", desc = "Run request under the cursor" },
     { "<leader>hl", "<cmd>Rest run last<cr>", desc = "Re-run latest request" },
@@ -76,7 +84,7 @@ end
 
 function M.setup_go_keymaps()
   wk.add({
-    { "<leader>G", group = "go", icon = "" },
+    { "<leader>G", group = "Go", icon = "" },
     { "<leader>Gd", "<cmd>lua require('dap-go').debug_test()<cr>", desc = "Debug Test" },
     { "<leader>Gi", "<cmd>GoInstallDeps<Cr>", desc = "Install Go Dependencies" },
     { "<leader>Gt", "<cmd>GoMod tidy<cr>", desc = "Tidy" },
@@ -90,9 +98,9 @@ function M.setup_go_keymaps()
   })
 end
 
+-- select window
 function M.setup_window_keymaps()
-  -- select window
-  wk.add({ { "<leader>ws", "<Cmd>lua require('nvim-window').pick()<CR>", desc = "select window" } })
+  -- wk.add({ { "<leader>ws", "<Cmd>lua require('nvim-window').pick()<CR>", desc = "select window" } })
   -- Resize window fastly
   vim.keymap.set({ "n" }, "<M-up>", ":res -5<cr>")
   vim.keymap.set({ "n" }, "<M-down>", ":res +5<cr>")
@@ -121,19 +129,20 @@ end
 function M.setup_scissor_keymaps()
   -- scissor manage snippts
   wk.add({
-    { "<leader>p", group = "snippts" },
+    { "<leader>p", group = "Snippts" },
     { "<leader>pa", ":ScissorsAddNewSnippet<cr>", desc = "Add New Snippt" },
-    { "<leader>pA", ":'<,'>ScissorsAddNewSnippet<cr>", desc = "Add New Snippt in Visual Mode" },
+    -- { "<leader>pA", ":'<,'>ScissorsAddNewSnippet<cr>", desc = "Add New Snippt in Visual Mode" },
     { "<leader>pe", ":ScissorsEditSnippet<cr>", desc = "Edit Snippt" },
   })
+  vim.keymap.set({ "v" }, "<leader>pA", ":'<,'>ScissorsAddNewSnippet<cr>", { noremap = true })
 end
 
 function M.setup_translate_keymaps()
   -- tranlate quickly
-  vim.keymap.set("n", "le", ":Translate EN<CR>")
-  vim.keymap.set("n", "lz", ":Translate ZH<CR>")
+  vim.keymap.set("n", "te", ":Translate EN<CR>")
+  vim.keymap.set("n", "tz", ":Translate ZH<CR>")
   -- vim.keymap.set("n", "lz", ":'<,'>Translate ZH<CR>")
-  vim.keymap.set("n", "lw", "viw:Translate ZH<CR>")
+  vim.keymap.set("n", "tw", "viw:Translate ZH<CR>")
 end
 
 function M.setup_markdown_keymaps()
@@ -211,9 +220,10 @@ function M.setup_typescript_lsp_keymaps()
 end
 
 function M.setup_diffview_keymaps()
-  return {
+  local keymaps = {
     -- use [c and [c to navigate diffs (vim built in), see :h jumpto-diffs
     -- use ]x and [x to navigate conflicts
+    { "<leader>gd", group = "Git Diff" },
     { "<leader>gdc", ":DiffviewOpen origin/main...HEAD", desc = "Compare commits" },
     { "<leader>gdq", ":DiffviewClose<CR>", desc = "Close Diffview tab" },
     { "<leader>gdh", ":DiffviewFileHistory %<CR>", desc = "File history" },
@@ -228,6 +238,8 @@ function M.setup_diffview_keymaps()
       desc = "Review current PR (per commit)",
     },
   }
+  wk.add(keymaps)
+  return keymaps
 end
 
 function M.setup_terminal_keymaps()
@@ -257,36 +269,38 @@ function M.setup_terminal_keymaps()
 end
 
 function M.setup_minimap_keymaps()
-  return {
-    { "<Leader>um", "<cmd>Neominimap toggle<CR>", desc = "Toggle Mini map" },
-    -- { "<leader>nt", "<cmd>Neominimap toggle<cr>", desc = "Toggle minimap" },
-    -- { "<leader>no", "<cmd>Neominimap on<cr>", desc = "Enable minimap" },
-    -- { "<leader>nc", "<cmd>Neominimap off<cr>", desc = "Disable minimap" },
-    -- { "<leader>nf", "<cmd>Neominimap focus<cr>", desc = "Focus on minimap" },
-    -- { "<leader>nu", "<cmd>Neominimap unfocus<cr>", desc = "Unfocus minimap" },
-    -- { "<leader>ns", "<cmd>Neominimap toggleFocus<cr>", desc = "Toggle focus on minimap" },
-    -- { "<leader>nwt", "<cmd>Neominimap winToggle<cr>", desc = "Toggle minimap for current window" },
-    -- { "<leader>nwr", "<cmd>Neominimap winRefresh<cr>", desc = "Refresh minimap for current window" },
+  local keymap = {
+    { "<Leader>um", group = "Mini Map" },
+    { "<Leader>umt", "<cmd>Neominimap toggle<CR>", desc = "Toggle Mini map" },
+    -- { "<leader>ume", "<cmd>Neominimap on<cr>", desc = "Enable minimap" },
+    -- { "<leader>umd", "<cmd>Neominimap off<cr>", desc = "Disable minimap" },
+    -- { "<leader>umf", "<cmd>Neominimap focus<cr>", desc = "Focus on minimap" },
+    -- { "<leader>umu", "<cmd>Neominimap unfocus<cr>", desc = "Unfocus minimap" },
+    { "<leader>umf", "<cmd>Neominimap toggleFocus<cr>", desc = "Toggle focus on minimap" },
+    { "<leader>umw", "<cmd>Neominimap winToggle<cr>", desc = "Toggle minimap for current window" },
+    { "<leader>umr", "<cmd>Neominimap winRefresh<cr>", desc = "Refresh minimap for current window" },
     -- { "<leader>nwo", "<cmd>Neominimap winOn<cr>", desc = "Enable minimap for current window" },
     -- { "<leader>nwc", "<cmd>Neominimap winOff<cr>", desc = "Disable minimap for current window" },
-    -- { "<leader>nbt", "<cmd>Neominimap bufToggle<cr>", desc = "Toggle minimap for current buffer" },
-    -- { "<leader>nbr", "<cmd>Neominimap bufRefresh<cr>", desc = "Refresh minimap for current buffer" },
+    { "<leader>umb", "<cmd>Neominimap bufToggle<cr>", desc = "Toggle minimap for current buffer" },
+    { "<leader>uma", "<cmd>Neominimap bufRefresh<cr>", desc = "Refresh minimap for current buffer" },
     -- { "<leader>nbo", "<cmd>Neominimap bufOn<cr>", desc = "Enable minimap for current buffer" },
     -- { "<leader>nbc", "<cmd>Neominimap bufOff<cr>", desc = "Disable minimap for current buffer" },
   }
+  wk.add(keymap)
+  return keymap
 end
 
 function M.setup_obsidian_keymaps(obsidian_vars)
-  return {
-    { "<leader>ns", "<cmd>ObsidianSearch<cr>", desc = "[N]otes: [s]earch text" },
-    { "<leader>nf", "<cmd>ObsidianQuickSwitch<cr>", desc = "[N]otes: search [f]ilenames" },
-    { "<leader>nn", "<cmd>ObsidianNew<cr>", desc = "[N]otes: [n]new" },
-    { "<leader>nl", "<cmd>ObsidianQuickSwitch Learning.md<cr><cr>", desc = "[N]otes: [l]earning" },
-    { "<leader>ng", "<cmd>ObsidianQuickSwitch Go.md<cr><cr>", desc = "[N]otes: [g]olang learning" },
-    { "<leader>nv", "<cmd>ObsidianQuickSwitch Neovim config.md<cr><cr>", desc = "[N]otes: Neo[v]im todo" },
-
+  local keymap = {
+    { "<leader>o", group = "Obsidian" },
+    { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "[N]otes: [s]earch text" },
+    { "<leader>of", "<cmd>ObsidianQuickSwitch<cr>", desc = "[N]otes: search [f]ilenames" },
+    { "<leader>on", "<cmd>ObsidianNew<cr>", desc = "[N]otes: [n]new" },
+    { "<leader>ol", "<cmd>ObsidianQuickSwitch Learning.md<cr><cr>", desc = "[N]otes: [l]earning" },
+    { "<leader>og", "<cmd>ObsidianQuickSwitch Go.md<cr><cr>", desc = "[N]otes: [g]olang learning" },
+    { "<leader>ov", "<cmd>ObsidianQuickSwitch Neovim config.md<cr><cr>", desc = "[N]otes: Neo[v]im todo" },
     {
-      "<leader>nS",
+      "<leader>oS",
       function()
         local client = require("obsidian").get_client()
         client:open_note(obsidian_vars.scratchpad_path)
@@ -294,7 +308,7 @@ function M.setup_obsidian_keymaps(obsidian_vars)
       desc = "[N]otes: [S]cratchpad",
     },
     {
-      "<leader>nm",
+      "<leader>om",
       function()
         local client = require("obsidian").get_client()
         -- client.dir is the vault path
@@ -310,6 +324,24 @@ function M.setup_obsidian_keymaps(obsidian_vars)
       desc = "[N]otes: new [m]eeting agenda from template",
     },
   }
+  wk.add(keymap)
+  return keymap
+end
+
+function M.setup_code_runner_keymaps()
+  local keymap = {
+    { "<leader>R", group = "Code Runner" },
+    { "<leader>Rc", "<cmd>RunCode<cr>", desc = "Run code" },
+    { "<leader>RC", "<cmd>RunCode tab<cr>", desc = "Run code in tab" },
+    { "<leader>Rf", "<cmd>RunFile<cr>", desc = "Run file" },
+    { "<leader>RF", "<cmd>RunFile tab<cr>", desc = "Run file in tab" },
+    { "<leader>Rp", "<cmd>RunProject<cr>", desc = "Run project" },
+    { "<leader>Rx", "<cmd>RunClose<cr>", desc = "Run close" },
+    { "<leader>Rt", "<cmd>CRFiletype<cr>", desc = "Run file type" },
+    { "<leader>Rs", "<cmd>CRProjects<cr>", desc = "Run projects" },
+  }
+  wk.add(keymap)
+  return keymap
 end
 
 return M

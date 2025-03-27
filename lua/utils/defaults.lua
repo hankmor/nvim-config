@@ -7,10 +7,10 @@ M.notifications = {
       path = nil,
       warn = false,
     },
-    mypy = {
-      path = nil,
-      warn = false,
-    },
+    -- mypy = {
+    --   path = nil,
+    --   warn = false,
+    -- },
     debugpy = {
       path = nil,
       warn = false,
