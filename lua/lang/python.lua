@@ -1,10 +1,10 @@
 local function find_executable(executable_name)
   local paths = {
-    vim.fn.expand(".venv/bin/" .. executable_name),                              -- 项目级
+    vim.fn.expand(".venv/bin/" .. executable_name), -- 项目级
     vim.env.VIRTUAL_ENV and (vim.env.VIRTUAL_ENV .. "/bin/" .. executable_name), -- VIRTUAL_ENV
-    vim.fn.expand("~/.venvs/python3/bin/" .. executable_name),                   -- 全局虚拟环境
+    vim.fn.expand("~/.venvs/python3/bin/" .. executable_name), -- 全局虚拟环境
     vim.fn.expand("~/.local/share/nvim/mason/bin/" .. executable_name),
-    vim.fn.exepath(executable_name),                                             -- 系统全局
+    vim.fn.exepath(executable_name), -- 系统全局
   }
   for _, path in ipairs(paths) do
     if path and vim.fn.executable(path) == 1 then
@@ -28,11 +28,11 @@ local function notify_tooling(lang)
       if info.path ~= nil then
         if info.warn == true then
           warnings = warnings
-              .. "Using "
-              .. tool
-              .. " from Mason ("
-              .. info.path
-              .. "), consider installing it in your virtual environment.\n"
+            .. "Using "
+            .. tool
+            .. " from Mason ("
+            .. info.path
+            .. "), consider installing it in your virtual environment.\n"
         else
           infos = infos .. "Using " .. tool .. ": " .. info.path .. "\n"
         end
@@ -90,46 +90,6 @@ end
 -- })
 
 return {
-  {
-    "neovim/nvim-lspconfig",
-    ft = "python",
-    opts = {
-      servers = {
-        ruff = {
-          cmd_env = { RUFF_TRACE = "messages" },
-          init_options = {
-            settings = {
-              logLevel = "error",
-            },
-          },
-          keys = {
-            {
-              "<leader>co",
-              LazyVim.lsp.action["source.organizeImports"],
-              desc = "Organize Imports",
-            },
-          },
-        },
-        ruff_lsp = {
-          keys = {
-            {
-              "<leader>co",
-              LazyVim.lsp.action["source.organizeImports"],
-              desc = "Organize Imports",
-            },
-          },
-        },
-      },
-      setup = {
-        ["ruff"] = function()
-          LazyVim.lsp.on_attach(function(client, _)
-            -- Disable hover in favor of Pyright
-            client.server_capabilities.hoverProvider = false
-          end, ruff)
-        end,
-      },
-    },
-  },
   {
     "mfussenegger/nvim-dap-python",
     -- stylua: ignore
