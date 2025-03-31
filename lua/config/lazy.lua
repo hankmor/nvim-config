@@ -53,4 +53,25 @@ require("lazy").setup({
   },
 })
 
+-- config custom dap in project .nvim/dap.lua file
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    local dap_config = vim.fn.getcwd() .. "/.nvim/dap.lua"
+    -- vim.notify("dap_config:" .. dap_config)
+    if vim.fn.filereadable(dap_config) == 1 then
+      local custom_dap = dofile(dap_config)
+      print(custom_dap)
+      local dap = require("dap")
+      -- dap.adapters.go = {
+      -- 	type = "executable",
+      -- 	command = "dlv",
+      -- 	args = { "dap", "-l", "127.0.0.1:38697" },
+      -- }
+      dap.configurations.go = vim.tbl_deep_extend("force", dap.configurations.go, custom_dap)
+
+      vim.notify("Loaded DAP config from .nvim/dap.lua")
+    end
+  end,
+})
+
 require("config.keymaps").setup_keymaps()
