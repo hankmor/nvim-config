@@ -81,24 +81,6 @@ return {
           -- nvim内部终端
           -- console = "integratedTerminal",
         },
-        {
-          type = "go",
-          name = "Debug Package Api (dev)",
-          request = "launch",
-          program = "${workspaceFolder}/cmd/api",
-          args = { "-c", "${workspaceFolder}/cmd/api/conf/dev.yml" },
-          outputMode = "remote",
-          cwd = "${workspaceFolder}",
-        },
-        {
-          type = "go",
-          name = "Debug Package Job (dev)",
-          request = "launch",
-          program = "${workspaceFolder}/cmd/job",
-          args = { "-c", "${workspaceFolder}/cmd/job/conf/dev.yml" },
-          outputMode = "remote",
-          cwd = "${workspaceFolder}",
-        },
       }
       -- 安装dap-go
       require("dap-go").setup() -- 初始化 nvim-dap-go
