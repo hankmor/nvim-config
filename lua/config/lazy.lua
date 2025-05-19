@@ -1,3 +1,9 @@
+local status, utils = pcall(require, "utils.vscode")
+if not status then
+  vim.notify("vscode not loaded")
+  return
+end
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -56,6 +62,10 @@ require("lazy").setup({
 -- config custom dap in project .nvim/dap.lua file
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
+    -- vscode中运行neovim
+    if utils.is_in_vscode() then
+      return
+    end
     local dap_config = vim.fn.getcwd() .. "/.nvim/dap.lua"
     -- vim.notify("dap_config:" .. dap_config)
     if vim.fn.filereadable(dap_config) == 1 then
